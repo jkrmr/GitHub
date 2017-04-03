@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     repositoriesTableView.delegate = self
     repositoriesTableView.dataSource = self
 
@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
     OperationQueue().addOperation {
       GitHubAPI.shared.listRepositories { json in
         guard let json = json else { return }
-        
+
         for entry in json {
           guard let repo = Repository(json: entry) else { continue }
           OperationQueue.main.addOperation {

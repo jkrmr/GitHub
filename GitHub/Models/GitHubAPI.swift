@@ -14,13 +14,13 @@ typealias RecordResponse = ([String: AnyObject]?) -> Void
 class GitHubAPI {
   static let shared = GitHubAPI()
   private init() {}
-  
+
   let session = URLSession(configuration: .default)
   let apiBaseURL = "https://api.github.com"
 
   var accessToken: String {
     guard let path = Bundle.main.url(forResource: "env", withExtension: "json"),
-      let data = try? Data.init(contentsOf: path),
+      let data = try? Data(contentsOf: path),
       let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject],
       let token = json?["access_token"] as? String
       else { return "" }
@@ -48,10 +48,10 @@ class GitHubAPI {
 
     guard let url = URL(string: "\(apiBaseURL)\(path)?access_token=\(accessToken)")
       else { return print("Error: Malformed URL") }
-    
-    dataTask = session.dataTask(with: url) { (data, resp, error) in
+
+    dataTask = session.dataTask(with: url) { (data, _, error) in
       if error != nil { return print("Error: Could not connect to \(url.absoluteString)") }
-      
+
       if let data = data,
         let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),
         let dict = json as? [[String: AnyObject]] {
@@ -65,7 +65,7 @@ class GitHubAPI {
       }
       return
     }
-    
+
     dataTask?.resume()
   }
 }

@@ -18,7 +18,7 @@ struct Repository: Decodable {
   let createdAt: String
   let isPrivate: Bool
   let isFork: Bool
-  
+
   let description: String
   let homepage: String
   let language: String
@@ -27,7 +27,7 @@ struct Repository: Decodable {
   let stargazersCount: Int
   let subscribersCount: Int
   let watchersCount: Int
-  
+
   init?(json: JSON) {
     guard let id: Int = "id" <~~ json,
       let name: String = "name" <~~ json,
@@ -56,10 +56,9 @@ struct Repository: Decodable {
     self.forksCount = "forks_count" <~~ json ?? 0
     self.stargazersCount = "stargazers_count" <~~ json ?? 0
     self.subscribersCount = "subscribers_count" <~~ json ?? 0
-    self.watchersCount = "watchers_count" <~~ json  ?? 0
+    self.watchersCount = "watchers_count" <~~ json ?? 0
   }
 }
-
 
 // has_downloads
 // has_issues

@@ -14,7 +14,7 @@ struct User: Decodable {
   let login: String
   let type: String
   let urlHTML: String
-  
+
   let urlFollowers: String?
   let urlFollowing: String?
   let urlGists: String?
@@ -24,7 +24,7 @@ struct User: Decodable {
   let urlRepos: String?
   let urlEvents: String?
   let urlReceivedEvents: String?
-  
+
   init?(json: JSON) {
     guard let id: Int = ("id" <~~ json),
       let login: String = ("login" <~~ json),
@@ -36,7 +36,7 @@ struct User: Decodable {
     self.login = login
     self.type = type
     self.urlHTML = urlHTML
-    
+
     self.urlFollowers = "followers_url" <~~ json
     self.urlFollowing = "following_url" <~~ json
     self.urlGists = "gists_url" <~~ json
