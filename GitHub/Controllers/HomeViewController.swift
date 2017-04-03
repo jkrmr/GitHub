@@ -10,13 +10,25 @@ import UIKit
 
 class HomeViewController: UIViewController {
   @IBOutlet weak var repositoriesTableView: UITableView!
+  @IBOutlet weak var repositorySearchBar: UISearchBar!
 
   var repositories = [Repository]() {
     didSet { repositoriesTableView.reloadData() }
   }
 
+  var filteredRepositories = [Repository]()
+  var inSearchMode: Bool = false
+
+  var selectedRepositorySet: [Repository] {
+    if inSearchMode { return filteredRepositories }
+    return repositories
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    repositorySearchBar.delegate = self
+    repositorySearchBar.returnKeyType = .done
 
     repositoriesTableView.delegate = self
     repositoriesTableView.dataSource = self
@@ -49,13 +61,14 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return repositories.count
+    return selectedRepositorySet.count
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if let cell = repositoriesTableView.dequeueReusableCell(withIdentifier: RepositoryTableCell.reuseID,
                                                             for: indexPath) as? RepositoryTableCell {
-      cell.repository = repositories[indexPath.row]
+      cell.repository = selectedRepositorySet[indexPath.row]
+
       return cell
     } else {
       return RepositoryTableCell()
@@ -63,7 +76,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let repository = repositories[indexPath.row]
+    let repository = selectedRepositorySet[indexPath.row]
     repositoriesTableView.deselectRow(at: indexPath, animated: false)
     performSegue(withIdentifier: RepositoryViewController.reuseID, sender: repository)
   }
@@ -75,5 +88,18 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
       controller.repository = repository
       return
     }
+  }
+}
+
+extension HomeViewController: UISearchBarDelegate {
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    if searchBar.text == nil || searchBar.text == "" {
+      inSearchMode = false
+    } else {
+      inSearchMode = true
+      let searchTerm = searchText.lowercased()
+      filteredRepositories = repositories.filter { $0.name.lowercased().range(of: searchTerm) != nil }
+    }
+    repositoriesTableView.reloadData()
   }
 }

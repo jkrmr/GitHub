@@ -38,11 +38,18 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-nd-dZr">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="TWC-nd-dZr" secondAttribute="trailing" id="02k-6R-20m"/>
+                            <constraint firstItem="TWC-nd-dZr" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="5ab-Su-cTq"/>
                             <constraint firstAttribute="trailing" secondItem="6Gi-Zp-hnY" secondAttribute="trailing" id="PPe-12-1iE"/>
+                            <constraint firstItem="TWC-nd-dZr" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="WKr-vm-FbI"/>
                             <constraint firstItem="6Gi-Zp-hnY" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="Xdf-Fp-cCa"/>
                             <constraint firstItem="6Gi-Zp-hnY" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="x3A-4g-NuE"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="6Gi-Zp-hnY" secondAttribute="bottom" constant="-52" id="zFZ-wf-H7w"/>
@@ -51,6 +58,7 @@
                     <navigationItem key="navigationItem" title="Repositories" id="hCd-yM-Hw7"/>
                     <connections>
                         <outlet property="repositoriesTableView" destination="6Gi-Zp-hnY" id="MV4-hl-v5f"/>
+                        <outlet property="repositorySearchBar" destination="TWC-nd-dZr" id="y1y-v7-RG2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
