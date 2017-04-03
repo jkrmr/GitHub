@@ -18,8 +18,9 @@ class GitHubAPI {
   let session = URLSession(configuration: .default)
   let apiBaseURL = "https://api.github.com"
   let apiAuthorizationURL = "https://github.com/login/oauth/access_token"
+  let apiOAuthURL = "https://github.com/login/oauth/authorize"
 
-  let clientId = ENVVars.shared.get("client_id")
+  let clientID = ENVVars.shared.get("client_id")
   let clientSecret = ENVVars.shared.get("client_secret")
   var accessToken: String? { return UserDefaults.standard.getAccessToken() }
 
@@ -66,14 +67,28 @@ class GitHubAPI {
     dataTask?.resume()
   }
 
+  /// Build a URLRequest for requesting an authentication code
+  func getAuthenticationRequest() -> URLRequest? {
+    let scopes = [
+      "repo",
+      "email"
+      ].joined(separator: ",")
+    let redirectURI = "github://auth?duration=permanent&scope=\(scopes)"
+
+    guard let url = URL(string: "\(apiOAuthURL)?client_id=\(clientID)&scope=\(scopes)&redirect_uri=\(redirectURI)")
+      else { return nil }
+
+    return URLRequest(url: url)
+  }
+
   /// Send a POST request to the api authorization URL with `code` AUTHCODE,
   /// yielding the response JSON to the completion handler COMPLETION as a dictionary.
   func postAuthorization(authCode: String, completion: @escaping RecordResponse) {
     guard let url = URL(string: apiAuthorizationURL)
       else { return print("Error: Malformed URL") }
 
-    let params = ["client_id": clientId, "client_secret": clientSecret,
-                  "code": authCode, "redirect_uri": "github://auth?step=authorization"]
+    let params = ["client_id": clientID, "client_secret": clientSecret,
+                  "code": authCode, "redirect_uri": "github://auth"]
 
     guard let paramData = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
       else { return print("Error: Could not serialize auth request POST params") }
