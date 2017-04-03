@@ -11,14 +11,22 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
-  
+
+//  self.window.rootViewController =
+//  [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"**STORYBOARD ID**"];
+
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     if let savedCode = UserDefaults().string(forKey: "github_access_token") {
+      print("already authorized on Github")
       print(savedCode)
-      // go directly to home view controller
+
+      let tabBarController = window?.rootViewController?.storyboard?.instantiateViewController(withIdentifier: ShortTabBarController.reuseID)
+      window?.rootViewController = tabBarController
     } else {
       print("no saved code")
-      // go to authentication controller
+
+      let authController = window?.rootViewController?.storyboard?.instantiateViewController(withIdentifier: AuthenticationViewController.reuseID)
+      window?.rootViewController = authController
     }
     return true
   }
@@ -59,6 +67,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return true
       }
+    }
+
+    
+    if url.scheme == "github" && url.host == "authorized" {
+      print("hi!")
     }
     
     return false

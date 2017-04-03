@@ -136,7 +136,7 @@
         <!--Short Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController id="49e-Tb-3d3" customClass="ShortTabBarController" customModule="GitHub" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="ShortTabBarController" id="49e-Tb-3d3" customClass="ShortTabBarController" customModule="GitHub" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
@@ -196,10 +196,10 @@
             </objects>
             <point key="canvasLocation" x="455" y="798"/>
         </scene>
-        <!--Authentication View Controller-->
+        <!--Authentication-->
         <scene sceneID="X0M-bX-bo8">
             <objects>
-                <viewController id="HAV-wm-H7T" customClass="AuthenticationViewController" customModule="GitHub" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthenticationViewController" title="Authentication" id="HAV-wm-H7T" customClass="AuthenticationViewController" customModule="GitHub" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uT2-no-tMd"/>
                         <viewControllerLayoutGuide type="bottom" id="loQ-FK-Cty"/>
