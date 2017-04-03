@@ -72,7 +72,7 @@ class GitHubAPI {
     let clientSecret = ENVVars.shared.get("client_secret")
     let oauthCode = UserDefaults().string(forKey: "github_oauth_code")
     let params = ["client_id": clientId, "client_secret": clientSecret,
-                  "code": oauthCode, "redirect_uri": "github://authorized"]
+                  "code": oauthCode, "redirect_uri": "github://auth?step=authorization"]
     guard let paramData = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
       else { return print("Error: Could not serialize auth request POST params") }
 

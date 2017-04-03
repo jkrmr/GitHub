@@ -12,19 +12,11 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
 
-//  self.window.rootViewController =
-//  [self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"**STORYBOARD ID**"];
-
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    if let savedCode = UserDefaults().string(forKey: "github_access_token") {
-      print("already authorized on Github")
-      print(savedCode)
-
+    if let _ = UserDefaults().string(forKey: "github_access_token") {
       let tabBarController = window?.rootViewController?.storyboard?.instantiateViewController(withIdentifier: ShortTabBarController.reuseID)
       window?.rootViewController = tabBarController
     } else {
-      print("no saved code")
-
       let authController = window?.rootViewController?.storyboard?.instantiateViewController(withIdentifier: AuthenticationViewController.reuseID)
       window?.rootViewController = authController
     }
@@ -54,26 +46,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-    if url.scheme == "github" && url.host == "authenticate" {
+    if url.scheme == "github" && url.host == "auth" {
       let queryParams = url.query?.components(separatedBy: "&")
       let codeParam = queryParams?.filter({ $0.hasPrefix("code=") }).first
+
       if let code = codeParam?.replacingOccurrences(of: "code=", with: "") {
         UserDefaults().set(code, forKey: "github_oauth_code")
-
+        
         GitHubAPI.shared.post { (resp) in
           guard resp != nil, let accessToken = resp?["access_token"] as? String
             else { return }
           UserDefaults().set(accessToken, forKey: "github_access_token")
+
+          // if access granted, load tab bar controller
+          let tabBarController = self.window?.rootViewController?.storyboard?.instantiateViewController(withIdentifier: ShortTabBarController.reuseID)
+          self.window?.rootViewController = tabBarController
         }
+
         return true
       }
     }
 
-    
-    if url.scheme == "github" && url.host == "authorized" {
-      print("hi!")
-    }
-    
     return false
   }
 }
