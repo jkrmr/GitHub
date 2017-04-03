@@ -10,6 +10,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
   @IBOutlet weak var repositoriesTableView: UITableView!
+
   var repositories = [Repository]() {
     didSet { repositoriesTableView.reloadData() }
   }
@@ -62,6 +63,17 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    print("selected at row \(indexPath.row)")
+    let repository = repositories[indexPath.row]
+    repositoriesTableView.deselectRow(at: indexPath, animated: false)
+    performSegue(withIdentifier: RepositoryViewController.reuseID, sender: repository)
+  }
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == RepositoryViewController.reuseID,
+      let controller = segue.destination as? RepositoryViewController,
+      let repository = sender as? Repository {
+      controller.repository = repository
+      return
+    }
   }
 }

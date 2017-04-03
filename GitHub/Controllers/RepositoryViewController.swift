@@ -9,7 +9,15 @@
 import UIKit
 
 class RepositoryViewController: UIViewController {
+  var repository: Repository?
+
+  @IBOutlet weak var repoName: UILabel!
+
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    if let repository = repository {
+      repoName.text = repository.name
+    }
   }
 }
