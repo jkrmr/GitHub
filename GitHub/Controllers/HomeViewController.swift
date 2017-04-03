@@ -9,20 +9,59 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-  var repositories = [Repository]()
+  @IBOutlet weak var repositoriesTableView: UITableView!
+  var repositories = [Repository]() {
+    didSet { repositoriesTableView.reloadData() }
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    repositoriesTableView.delegate = self
+    repositoriesTableView.dataSource = self
 
-    GitHubAPI.shared.listRepositories { json in
-      guard let json = json else { return }
+    let repoNib = UINib(nibName: RepositoryTableCell.reuseID, bundle: nil)
+    repositoriesTableView.register(repoNib, forCellReuseIdentifier: RepositoryTableCell.reuseID)
 
-      for entry in json {
-        guard let repo = Repository(json: entry) else { continue }
-        self.repositories.append(repo)
+    loadRepositories()
+  }
+
+  func loadRepositories() {
+    OperationQueue().addOperation {
+      GitHubAPI.shared.listRepositories { json in
+        guard let json = json else { return }
+        
+        for entry in json {
+          guard let repo = Repository(json: entry) else { continue }
+          OperationQueue.main.addOperation {
+            self.repositories.append(repo)
+          }
+        }
       }
-
-      print(self.repositories.count)
     }
+  }
+}
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return 1
+  }
+
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return repositories.count
+  }
+
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    if let cell = repositoriesTableView.dequeueReusableCell(withIdentifier: RepositoryTableCell.reuseID,
+                                                            for: indexPath) as? RepositoryTableCell {
+      cell.repository = repositories[indexPath.row]
+      return cell
+    } else {
+      return RepositoryTableCell()
+    }
+  }
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    print("selected at row \(indexPath.row)")
   }
 }
