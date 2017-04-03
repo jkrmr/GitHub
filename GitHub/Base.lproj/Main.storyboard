@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -217,19 +216,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kru-gf-pWJ">
-                                <rect key="frame" x="16" y="20" width="343" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="j2H-9F-Knn">
+                                <rect key="frame" x="169" y="315.5" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="kru-gf-pWJ" secondAttribute="trailing" id="4Xm-5K-0Ot"/>
-                            <constraint firstItem="kru-gf-pWJ" firstAttribute="top" secondItem="uT2-no-tMd" secondAttribute="bottom" id="6gv-56-frm"/>
-                            <constraint firstItem="kru-gf-pWJ" firstAttribute="leading" secondItem="8FP-xm-lFN" secondAttribute="leadingMargin" id="K0Q-67-Rax"/>
-                            <constraint firstItem="loQ-FK-Cty" firstAttribute="top" secondItem="kru-gf-pWJ" secondAttribute="bottom" id="wJ4-3u-XQN"/>
+                            <constraint firstItem="kru-gf-pWJ" firstAttribute="top" secondItem="uT2-no-tMd" secondAttribute="bottom" id="CZe-YH-Bdm"/>
+                            <constraint firstItem="loQ-FK-Cty" firstAttribute="top" secondItem="kru-gf-pWJ" secondAttribute="bottom" id="Cpa-rE-FDL"/>
+                            <constraint firstItem="j2H-9F-Knn" firstAttribute="centerY" secondItem="8FP-xm-lFN" secondAttribute="centerY" id="HX0-SX-h9h"/>
+                            <constraint firstAttribute="trailing" secondItem="kru-gf-pWJ" secondAttribute="trailing" id="fHD-Xe-shG"/>
+                            <constraint firstItem="kru-gf-pWJ" firstAttribute="leading" secondItem="8FP-xm-lFN" secondAttribute="leading" id="uHV-o3-pB6"/>
+                            <constraint firstItem="j2H-9F-Knn" firstAttribute="centerX" secondItem="8FP-xm-lFN" secondAttribute="centerX" id="vpF-wz-I1o"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loadingIndicator" destination="j2H-9F-Knn" id="p26-L3-lDG"/>
                         <outlet property="webView" destination="kru-gf-pWJ" id="rjd-XP-ulQ"/>
                         <segue destination="49e-Tb-3d3" kind="show" identifier="ShortTabViewController" id="Fit-OF-54B"/>
                     </connections>

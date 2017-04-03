@@ -8,13 +8,20 @@
 
 import UIKit
 
-class AuthenticationViewController: UIViewController {
+class AuthenticationViewController: UIViewController, UIWebViewDelegate {
   @IBOutlet weak var webView: UIWebView!
+  @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    webView.delegate = self
+
     if let authRequest = GitHubAPI.shared.getAuthenticationRequest() {
       webView.loadRequest(authRequest)
     }
+  }
+
+  func webViewDidFinishLoad(_ webView: UIWebView) {
+    loadingIndicator.stopAnimating()
   }
 }
