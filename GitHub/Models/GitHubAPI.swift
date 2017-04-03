@@ -17,17 +17,9 @@ class GitHubAPI {
 
   let session = URLSession(configuration: .default)
   let apiBaseURL = "https://api.github.com"
+  var accessToken: String { return ENVVars.shared.get("access_token") }
 
-  var accessToken: String {
-    guard let path = Bundle.main.url(forResource: "env", withExtension: "json"),
-      let data = try? Data(contentsOf: path),
-      let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject],
-      let token = json?["access_token"] as? String
-      else { return "" }
-    return token
-  }
-
-  /// List the authenticated user's repositories and yield the collection to 
+  /// List the authenticated user's repositories and yield the collection to
   /// completion handler COMPLETION
   func listRepositories(completion: @escaping CollectionResponse) {
     let path = "/user/repos"

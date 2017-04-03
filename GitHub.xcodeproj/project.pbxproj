@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B3D6C2A1E92B6CE00423FAE /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D6C291E92B6CE00423FAE /* AuthenticationViewController.swift */; };
+		1B3D6C2C1E92B8D800423FAE /* ENVVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D6C2B1E92B8D800423FAE /* ENVVars.swift */; };
 		1B44A66D1E91827F006F4E4D /* GitHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44A66C1E91827F006F4E4D /* GitHubAPI.swift */; };
 		1B44A66F1E91DFF6006F4E4D /* env.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B44A66E1E91DFF6006F4E4D /* env.json */; };
 		1B44A6731E91EE26006F4E4D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44A6721E91EE26006F4E4D /* User.swift */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B3D6C291E92B6CE00423FAE /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationViewController.swift; path = Controllers/AuthenticationViewController.swift; sourceTree = "<group>"; };
+		1B3D6C2B1E92B8D800423FAE /* ENVVars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ENVVars.swift; path = Utilities/ENVVars.swift; sourceTree = "<group>"; };
 		1B44A66C1E91827F006F4E4D /* GitHubAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GitHubAPI.swift; path = Models/GitHubAPI.swift; sourceTree = "<group>"; };
 		1B44A66E1E91DFF6006F4E4D /* env.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = env.json; sourceTree = "<group>"; };
 		1B44A6721E91EE26006F4E4D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 				1BA2C2C41E90E2450013C605 /* Repository.swift */,
 				1B44A66C1E91827F006F4E4D /* GitHubAPI.swift */,
 				1B44A6721E91EE26006F4E4D /* User.swift */,
+				1B3D6C2B1E92B8D800423FAE /* ENVVars.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 				1BA2C2AD1E90DB190013C605 /* ProfileViewController.swift */,
 				1BA2C2C21E90E0400013C605 /* ShortTabBarController.swift */,
 				1B44A6741E91FF3C006F4E4D /* RepositoryViewController.swift */,
+				1B3D6C291E92B6CE00423FAE /* AuthenticationViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -282,8 +288,10 @@
 				1BA2C2C31E90E0400013C605 /* ShortTabBarController.swift in Sources */,
 				1B44A6781E920C16006F4E4D /* RepositoryTableCell.swift in Sources */,
 				1B44A6751E91FF3C006F4E4D /* RepositoryViewController.swift in Sources */,
+				1B3D6C2A1E92B6CE00423FAE /* AuthenticationViewController.swift in Sources */,
 				1B44A6731E91EE26006F4E4D /* User.swift in Sources */,
 				1BA2C2C71E90E27E0013C605 /* UIResponder.swift in Sources */,
+				1B3D6C2C1E92B8D800423FAE /* ENVVars.swift in Sources */,
 				1B44A66D1E91827F006F4E4D /* GitHubAPI.swift in Sources */,
 				1BA2C2AC1E90DB190013C605 /* HomeViewController.swift in Sources */,
 			);

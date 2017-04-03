@@ -42,11 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
 //    let urlScheme = url.scheme
 //    let host = url.host
-    let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-    if let params = urlComponents?.queryItems {
+//    let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+//    if let params = urlComponents?.queryItems {
 //      print(params.first?.name)
 //      print(params.first?.value)
-    }
+//    }
     return false
   }
 }
