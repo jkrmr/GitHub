@@ -9,7 +9,20 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+  var repositories = [Repository]()
+
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    GitHubAPI.shared.listRepositories { json in
+      guard let json = json else { return }
+
+      for entry in json {
+        guard let repo = Repository(json: entry) else { continue }
+        self.repositories.append(repo)
+      }
+
+      print(self.repositories.count)
+    }
   }
 }

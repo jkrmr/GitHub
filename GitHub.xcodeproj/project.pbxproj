@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1B44A66D1E91827F006F4E4D /* GitHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44A66C1E91827F006F4E4D /* GitHubAPI.swift */; };
 		1B44A66F1E91DFF6006F4E4D /* env.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B44A66E1E91DFF6006F4E4D /* env.json */; };
+		1B44A6731E91EE26006F4E4D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44A6721E91EE26006F4E4D /* User.swift */; };
 		1BA2C2AA1E90DB190013C605 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA2C2A91E90DB190013C605 /* AppDelegate.swift */; };
 		1BA2C2AC1E90DB190013C605 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA2C2AB1E90DB190013C605 /* HomeViewController.swift */; };
 		1BA2C2AE1E90DB190013C605 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA2C2AD1E90DB190013C605 /* ProfileViewController.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		1B44A66C1E91827F006F4E4D /* GitHubAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GitHubAPI.swift; path = Models/GitHubAPI.swift; sourceTree = "<group>"; };
 		1B44A66E1E91DFF6006F4E4D /* env.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = env.json; sourceTree = "<group>"; };
+		1B44A6721E91EE26006F4E4D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		1BA2C2A61E90DB190013C605 /* GitHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BA2C2A91E90DB190013C605 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BA2C2AB1E90DB190013C605 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = Controllers/HomeViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			children = (
 				1BA2C2C41E90E2450013C605 /* Repository.swift */,
 				1B44A66C1E91827F006F4E4D /* GitHubAPI.swift */,
+				1B44A6721E91EE26006F4E4D /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				1BA2C2AA1E90DB190013C605 /* AppDelegate.swift in Sources */,
 				1BA2C2C51E90E2450013C605 /* Repository.swift in Sources */,
 				1BA2C2C31E90E0400013C605 /* ShortTabBarController.swift in Sources */,
+				1B44A6731E91EE26006F4E4D /* User.swift in Sources */,
 				1BA2C2C71E90E27E0013C605 /* UIResponder.swift in Sources */,
 				1B44A66D1E91827F006F4E4D /* GitHubAPI.swift in Sources */,
 				1BA2C2AC1E90DB190013C605 /* HomeViewController.swift in Sources */,
