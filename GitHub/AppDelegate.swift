@@ -13,7 +13,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+    if let savedCode = UserDefaults().string(forKey: "github_access_token") {
+      print(savedCode)
+      // go directly to home view controller
+    } else {
+      print("no saved code")
+      // go to authentication controller
+    }
     return true
   }
   
@@ -40,13 +46,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-//    let urlScheme = url.scheme
-//    let host = url.host
-//    let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-//    if let params = urlComponents?.queryItems {
-//      print(params.first?.name)
-//      print(params.first?.value)
-//    }
+    if url.scheme == "github" && url.host == "authenticate" {
+      let queryParams = url.query?.components(separatedBy: "&")
+      let codeParam = queryParams?.filter({ $0.hasPrefix("code=") }).first
+      if let code = codeParam?.replacingOccurrences(of: "code=", with: "") {
+        UserDefaults().set(code, forKey: "github_oauth_code")
+
+        GitHubAPI.shared.post { (resp) in
+          guard resp != nil, let accessToken = resp?["access_token"] as? String
+            else { return }
+          UserDefaults().set(accessToken, forKey: "github_access_token")
+        }
+        return true
+      }
+    }
+    
     return false
   }
 }
