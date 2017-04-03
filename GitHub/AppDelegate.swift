@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    if let _ = UserDefaults().string(forKey: "github_access_token") {
+    if let _ = UserDefaults.standard.getAccessToken() {
       let tabBarController = window?.rootViewController?.storyboard?.instantiateViewController(withIdentifier: ShortTabBarController.reuseID)
       window?.rootViewController = tabBarController
     } else {
@@ -51,22 +51,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       let codeParam = queryParams?.filter({ $0.hasPrefix("code=") }).first
 
       if let code = codeParam?.replacingOccurrences(of: "code=", with: "") {
-        UserDefaults().set(code, forKey: "github_oauth_code")
-        
-        GitHubAPI.shared.post { (resp) in
+        GitHubAPI.shared.postAuthorization(authCode: code) { (resp) in
           guard resp != nil, let accessToken = resp?["access_token"] as? String
             else { return }
-          UserDefaults().set(accessToken, forKey: "github_access_token")
-
-          // if access granted, load tab bar controller
-          let tabBarController = self.window?.rootViewController?.storyboard?.instantiateViewController(withIdentifier: ShortTabBarController.reuseID)
-          self.window?.rootViewController = tabBarController
+          
+          if UserDefaults.standard.saveAccessToken(accessToken) {
+            // if access granted, load tab bar controller
+            let tabBarController = self.window?.rootViewController?.storyboard?.instantiateViewController(withIdentifier: ShortTabBarController.reuseID)
+            self.window?.rootViewController = tabBarController
+          }
         }
 
         return true
       }
     }
-
     return false
   }
 }
