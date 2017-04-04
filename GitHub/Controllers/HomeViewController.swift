@@ -9,33 +9,33 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-  @IBOutlet weak var repositoriesTableView: UITableView!
-  @IBOutlet weak var repositorySearchBar: UISearchBar!
+  // MARK: IBOutlets
+  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
 
-  var repositories = [Repository]() {
-    didSet { repositoriesTableView.reloadData() }
+  // MARK: Properties
+  var allRepositories = [Repository]() {
+    didSet { tableView.reloadData() }
   }
-
   var filteredRepositories = [Repository]()
   var inSearchMode: Bool = false
-
-  var selectedRepositorySet: [Repository] {
+  var repositories: [Repository] {
     if inSearchMode { return filteredRepositories }
-    return repositories
+    return allRepositories
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    repositorySearchBar.delegate = self
-    repositorySearchBar.returnKeyType = .done
+    searchBar.delegate = self
+    searchBar.returnKeyType = .done
 
-    repositoriesTableView.delegate = self
-    repositoriesTableView.dataSource = self
+    tableView.delegate = self
+    tableView.dataSource = self
 
     let repoNib = UINib(nibName: RepositoryTableCell.reuseID, bundle: nil)
-    repositoriesTableView.register(repoNib, forCellReuseIdentifier: RepositoryTableCell.reuseID)
+    tableView.register(repoNib, forCellReuseIdentifier: RepositoryTableCell.reuseID)
 
     loadRepositories()
   }
@@ -46,7 +46,7 @@ class HomeViewController: UIViewController {
 
       for entry in json {
         guard let repo = Repository(json: entry) else { continue }
-        self.repositories.append(repo)
+        self.allRepositories.append(repo)
       }
       self.loadingIndicator.stopAnimating()
       self.loadingIndicator.isHidden = true
@@ -54,19 +54,20 @@ class HomeViewController: UIViewController {
   }
 }
 
+// MARK: TableView
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return selectedRepositorySet.count
+    return repositories.count
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if let cell = repositoriesTableView.dequeueReusableCell(withIdentifier: RepositoryTableCell.reuseID,
+    if let cell = tableView.dequeueReusableCell(withIdentifier: RepositoryTableCell.reuseID,
                                                             for: indexPath) as? RepositoryTableCell {
-      cell.repository = selectedRepositorySet[indexPath.row]
+      cell.repository = repositories[indexPath.row]
 
       return cell
     } else {
@@ -75,8 +76,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let repository = selectedRepositorySet[indexPath.row]
-    repositoriesTableView.deselectRow(at: indexPath, animated: false)
+    let repository = repositories[indexPath.row]
+    tableView.deselectRow(at: indexPath, animated: false)
     performSegue(withIdentifier: RepositoryViewController.reuseID, sender: repository)
   }
 
@@ -90,6 +91,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
   }
 }
 
+// MARK: Search Bar
 extension HomeViewController: UISearchBarDelegate {
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     if searchBar.text == nil || searchBar.text == "" {
@@ -97,8 +99,8 @@ extension HomeViewController: UISearchBarDelegate {
     } else {
       inSearchMode = true
       let searchTerm = searchText.lowercased()
-      filteredRepositories = repositories.filter { $0.name.lowercased().range(of: searchTerm) != nil }
+      filteredRepositories = allRepositories.filter { $0.name.lowercased().range(of: searchTerm) != nil }
     }
-    repositoriesTableView.reloadData()
+    tableView.reloadData()
   }
 }

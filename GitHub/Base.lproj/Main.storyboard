@@ -65,8 +65,8 @@
                     <navigationItem key="navigationItem" title="Repositories" id="hCd-yM-Hw7"/>
                     <connections>
                         <outlet property="loadingIndicator" destination="dg8-TE-XRk" id="RMk-9z-9eS"/>
-                        <outlet property="repositoriesTableView" destination="6Gi-Zp-hnY" id="MV4-hl-v5f"/>
-                        <outlet property="repositorySearchBar" destination="TWC-nd-dZr" id="y1y-v7-RG2"/>
+                        <outlet property="searchBar" destination="TWC-nd-dZr" id="eTh-rh-JJ0"/>
+                        <outlet property="tableView" destination="6Gi-Zp-hnY" id="ycM-z1-44Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>

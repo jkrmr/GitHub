@@ -62,6 +62,8 @@ class GitHubAPI {
         if let data = data,
           let stringified = String(data: data, encoding: .utf8) {
           print("Data: \(stringified)")
+          // TODO: If "message" == "Bad credentials", display alert,
+          // redirect to login
         }
         return
       }
@@ -96,7 +98,7 @@ class GitHubAPI {
     let params = ["client_id": clientID, "client_secret": clientSecret,
                   "code": authCode, "redirect_uri": "github://auth"]
 
-    guard let paramData = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+    guard let paramData = try? JSONSerialization.data(withJSONObject: params)
       else { return print("Error: Could not serialize auth request POST params") }
 
     // Prepare POST request
