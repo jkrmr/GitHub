@@ -92,10 +92,46 @@
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="9X1-jl-zY0">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="178"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5cA-qs-ncP" customClass="RoundedEdgeImageView" customModule="GitHub" customModuleProvider="target">
+                                            <rect key="frame" x="8" y="7" width="120" height="120"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="120" id="GZJ-fg-zkJ"/>
+                                                <constraint firstAttribute="width" constant="120" id="Wj6-Ij-wpF"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h7u-rR-D2f">
+                                            <rect key="frame" x="8" y="129" width="120" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="Oks-H2-djy" userLabel="height = 25"/>
+                                                <constraint firstAttribute="width" constant="120" id="siz-sC-i9q"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="R0p-Ic-qLE">
+                                            <rect key="frame" x="8" y="154" width="120" height="18"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="120" id="Ome-0g-WSO"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="R0p-Ic-qLE" firstAttribute="leading" secondItem="9X1-jl-zY0" secondAttribute="leading" constant="8" id="5IC-EO-NH9"/>
+                                        <constraint firstItem="h7u-rR-D2f" firstAttribute="top" secondItem="5cA-qs-ncP" secondAttribute="bottom" constant="2" id="Oco-Nq-x8e"/>
+                                        <constraint firstItem="5cA-qs-ncP" firstAttribute="top" secondItem="9X1-jl-zY0" secondAttribute="top" constant="7" id="Pma-w1-xPO"/>
+                                        <constraint firstItem="R0p-Ic-qLE" firstAttribute="top" secondItem="h7u-rR-D2f" secondAttribute="bottom" id="Rgg-s8-gNj"/>
+                                        <constraint firstItem="h7u-rR-D2f" firstAttribute="leading" secondItem="9X1-jl-zY0" secondAttribute="leading" constant="8" id="dWx-aT-qgK"/>
+                                        <constraint firstItem="5cA-qs-ncP" firstAttribute="leading" secondItem="9X1-jl-zY0" secondAttribute="leading" constant="8" id="n8i-Mi-QxX"/>
+                                    </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="175" id="Zj8-1k-RF8">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileCell" rowHeight="175" id="Zj8-1k-RF8">
                                         <rect key="frame" x="0.0" y="206" width="320" height="175"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zj8-1k-RF8" id="vRo-ss-RUK">
@@ -118,6 +154,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="Fh1-j5-D7R"/>
+                    <connections>
+                        <outlet property="navItem" destination="Fh1-j5-D7R" id="vcZ-lj-xMC"/>
+                        <outlet property="userAvatar" destination="5cA-qs-ncP" id="Lf6-IP-Och"/>
+                        <outlet property="userDisplayName" destination="h7u-rR-D2f" id="isR-pi-uNP"/>
+                        <outlet property="userProfileContainer" destination="9X1-jl-zY0" id="xhB-zf-qcC"/>
+                        <outlet property="userUsername" destination="R0p-Ic-qLE" id="xzr-6W-MIO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>

@@ -54,18 +54,13 @@ class GitHubAPI {
     getJSONCollection(path: path, completion: completion)
   }
 
-  // MARK: Search methods
-  private func buildSearchQuery(query: String, sort: SearchSort? = nil, order: SearchOrder? = nil) -> String {
-    let queryTerms = query.scan("[:word:]+").joined(separator: "+")
-
-    // Build query string
-    var queryString = "?q=\(queryTerms)"
-    if let sort = sort?.rawValue { queryString += "&sort=\(sort)" }
-    if let order = order?.rawValue { queryString += "&order=\(order)" }
-
-    return queryString
+  // MARK: Activity streams
+  func listActivityForUser(username: String, completion: @escaping CollectionResponse) {
+    let path = "/users/\(username)/events"
+    getJSONCollection(path: path, completion: completion)
   }
 
+  // MARK: Search methods
   func searchRepositories(query: String, sort: SearchSort? = nil,
                           order: SearchOrder? = nil, completion: @escaping RecordResponse) {
     let path = "/search/repositories"
@@ -82,10 +77,28 @@ class GitHubAPI {
 
   func searchIssues(query: String, sort: SearchSort? = nil,
                     order: SearchOrder? = nil, completion: @escaping RecordResponse) {
+    let path = "/search/issues"
+    let queryString = buildSearchQuery(query: query, sort: sort, order: order)
+    getJSONRecord(path: "\(path)\(queryString)", completion: completion)
   }
 
+  // application/vnd.github.cloak-preview
   func searchCommits(query: String, sort: SearchSort? = nil,
                      order: SearchOrder? = nil, completion: @escaping RecordResponse) {
+    let path = "/search/commits"
+    let queryString = buildSearchQuery(query: query, sort: sort, order: order)
+    getJSONRecord(path: "\(path)\(queryString)", completion: completion)
+  }
+
+  private func buildSearchQuery(query: String, sort: SearchSort? = nil, order: SearchOrder? = nil) -> String {
+    let queryTerms = query.scan("[:word:]+").joined(separator: "+")
+
+    // Build query string
+    var queryString = "?q=\(queryTerms)"
+    if let sort = sort?.rawValue { queryString += "&sort=\(sort)" }
+    if let order = order?.rawValue { queryString += "&order=\(order)" }
+
+    return queryString
   }
 
   // MARK: Generic request methods

@@ -15,6 +15,8 @@ struct User: Decodable {
   let type: String
   let urlHTML: String
 
+  let name: String?
+  let urlAvatar: String?
   let urlFollowers: String?
   let urlFollowing: String?
   let urlGists: String?
@@ -37,6 +39,8 @@ struct User: Decodable {
     self.type = type
     self.urlHTML = urlHTML
 
+    self.name = "name" <~~ json
+    self.urlAvatar = "avatar_url" <~~ json
     self.urlFollowers = "followers_url" <~~ json
     self.urlFollowing = "following_url" <~~ json
     self.urlGists = "gists_url" <~~ json

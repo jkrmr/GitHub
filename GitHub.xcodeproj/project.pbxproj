@@ -18,6 +18,7 @@
 		1B44A6791E920C16006F4E4D /* RepositoryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B44A6771E920C16006F4E4D /* RepositoryTableCell.xib */; };
 		1B6940E21E94450A0014E900 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6940E11E94450A0014E900 /* UIImage.swift */; };
 		1B6940E41E9452B90014E900 /* RoundedEdgeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6940E31E9452B90014E900 /* RoundedEdgeImageView.swift */; };
+		1B6940E61E945F840014E900 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6940E51E945F840014E900 /* Event.swift */; };
 		1B8D961C1E938BB9009DE599 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8D961B1E938BB9009DE599 /* ExploreViewController.swift */; };
 		1B8D961E1E940BB5009DE599 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8D961D1E940BB5009DE599 /* String.swift */; };
 		1B8D96211E9416EB009DE599 /* UserSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8D961F1E9416EB009DE599 /* UserSearchResultCell.swift */; };
@@ -46,6 +47,7 @@
 		1B44A6771E920C16006F4E4D /* RepositoryTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RepositoryTableCell.xib; path = Views/RepositoryTableCell.xib; sourceTree = "<group>"; };
 		1B6940E11E94450A0014E900 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImage.swift; path = Utilities/UIImage.swift; sourceTree = "<group>"; };
 		1B6940E31E9452B90014E900 /* RoundedEdgeImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundedEdgeImageView.swift; path = Views/RoundedEdgeImageView.swift; sourceTree = "<group>"; };
+		1B6940E51E945F840014E900 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Models/Event.swift; sourceTree = "<group>"; };
 		1B8D961B1E938BB9009DE599 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreViewController.swift; path = Controllers/ExploreViewController.swift; sourceTree = "<group>"; };
 		1B8D961D1E940BB5009DE599 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = String.swift; path = Utilities/String.swift; sourceTree = "<group>"; };
 		1B8D961F1E9416EB009DE599 /* UserSearchResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSearchResultCell.swift; path = Views/UserSearchResultCell.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				1B44A66C1E91827F006F4E4D /* GitHubAPI.swift */,
 				1B44A6721E91EE26006F4E4D /* User.swift */,
 				1B3D6C2B1E92B8D800423FAE /* ENVVars.swift */,
+				1B6940E51E945F840014E900 /* Event.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				1B6940E41E9452B90014E900 /* RoundedEdgeImageView.swift in Sources */,
 				1BA2C2C31E90E0400013C605 /* ShortTabBarController.swift in Sources */,
 				1B3D6C301E92EC6400423FAE /* UserDefaults.swift in Sources */,
+				1B6940E61E945F840014E900 /* Event.swift in Sources */,
 				1B44A6781E920C16006F4E4D /* RepositoryTableCell.swift in Sources */,
 				1B6940E21E94450A0014E900 /* UIImage.swift in Sources */,
 				1B44A6751E91FF3C006F4E4D /* RepositoryViewController.swift in Sources */,
