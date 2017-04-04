@@ -9,21 +9,22 @@
 import Foundation
 
 extension UserDefaults {
+  private var githubAccessTokenKey: String {
+    return "github_access_token"
+  }
+
   func getAccessToken() -> String? {
-    let githubAccessTokenKey = "github_access_token"
     guard let token = UserDefaults.standard.string(forKey: githubAccessTokenKey)
       else { return nil }
     return token
   }
 
   func saveAccessToken(_ token: String) -> Bool {
-    let githubAccessTokenKey = "github_access_token"
     UserDefaults.standard.set(token, forKey: githubAccessTokenKey)
     return UserDefaults.standard.synchronize()
   }
 
   func removeAccessToken() -> Bool {
-    let githubAccessTokenKey = "github_access_token"
     UserDefaults.standard.removeObject(forKey: githubAccessTokenKey)
     return UserDefaults.standard.synchronize()
   }
