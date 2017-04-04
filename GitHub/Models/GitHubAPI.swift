@@ -74,7 +74,10 @@ class GitHubAPI {
   func getAuthenticationRequest() -> URLRequest? {
     let scopes = [
       "repo",
-      "email"
+      "user",
+      "delete_repo",
+      "gist",
+      "read:org"
       ].joined(separator: ",")
     let redirectURI = "github://auth?duration=permanent&scope=\(scopes)"
 
