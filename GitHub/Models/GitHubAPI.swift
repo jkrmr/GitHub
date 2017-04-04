@@ -89,7 +89,6 @@ class GitHubAPI {
   }
 
   // MARK: Generic request methods
-
   /// Send a Get request to the given PATH, yield the parsed json
   /// to the completion handler COMPLETION as an array of dictionaries.
   private func getJSONCollection(path: String, completion: @escaping CollectionResponse) {
