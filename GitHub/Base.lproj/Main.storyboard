@@ -144,17 +144,24 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="FCk-dh-8er">
+                                <rect key="frame" x="142" y="266" width="37" height="37"/>
+                                <color key="color" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="X69-BN-yJB" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="3yz-rV-Zum"/>
                             <constraint firstItem="X69-BN-yJB" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="top" id="LIV-AP-GY1"/>
                             <constraint firstAttribute="trailing" secondItem="X69-BN-yJB" secondAttribute="trailing" id="csV-4T-z8K"/>
+                            <constraint firstItem="FCk-dh-8er" firstAttribute="centerY" secondItem="QS5-Rx-YEW" secondAttribute="centerY" id="fvK-Xa-1O6"/>
+                            <constraint firstItem="FCk-dh-8er" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="k8v-b9-6a4"/>
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="X69-BN-yJB" secondAttribute="bottom" id="sWG-be-eyv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="Fh1-j5-D7R"/>
                     <connections>
+                        <outlet property="loadingIndicator" destination="FCk-dh-8er" id="fjp-pO-8bX"/>
                         <outlet property="navItem" destination="Fh1-j5-D7R" id="vcZ-lj-xMC"/>
                         <outlet property="userAvatar" destination="5cA-qs-ncP" id="Lf6-IP-Och"/>
                         <outlet property="userDisplayName" destination="h7u-rR-D2f" id="isR-pi-uNP"/>
