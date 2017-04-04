@@ -41,30 +41,33 @@ class GitHubAPI {
   /// Send a GET request to the given URL, yield the parsed JSON
   /// to the completion handler as a dictionary.
   func getJSON(path: String, completion: @escaping CollectionResponse) {
-    var dataTask: URLSessionDataTask?
+    OperationQueue().addOperation {
+      var dataTask: URLSessionDataTask?
 
-    guard let accessToken = accessToken,
-      let url = URL(string: "\(apiBaseURL)\(path)?access_token=\(accessToken)")
-      else { return print("Error: Malformed URL") }
+      guard let accessToken = self.accessToken,
+        let url = URL(string: "\(self.apiBaseURL)\(path)?access_token=\(accessToken)")
+        else { return print("Error: Malformed URL") }
 
-    dataTask = session.dataTask(with: url) { (data, _, error) in
-      if error != nil { return print("Error: Could not connect to \(url.absoluteString)") }
+      dataTask = self.session.dataTask(with: url) { (data, _, error) in
+        if error != nil { return print("Error: Could not connect to \(url.absoluteString)") }
 
-      if let data = data,
-        let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),
-        let dict = json as? [[String: AnyObject]] {
-        return completion(dict)
+        if let data = data,
+          let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),
+          let dict = json as? [[String: AnyObject]] {
+          OperationQueue.main.addOperation { completion(dict) }
+          return
+        }
+
+        print("Error: Could not parse JSON response")
+        if let data = data,
+          let stringified = String(data: data, encoding: .utf8) {
+          print("Data: \(stringified)")
+        }
+        return
       }
 
-      print("Error: Could not parse JSON response")
-      if let data = data,
-        let stringified = String(data: data, encoding: .utf8) {
-        print("Data: \(stringified)")
-      }
-      return
+      dataTask?.resume()
     }
-
-    dataTask?.resume()
   }
 
   /// Build a URLRequest for requesting an authentication code
@@ -105,31 +108,34 @@ class GitHubAPI {
   }
 
   /// Send a POST request with the given request object REQUEST,
-  /// yielding the response JSON to the completion handler 
+  /// yielding the response JSON to the completion handler
   /// COMPLETION as a dictionary.
   func post(request: URLRequest, completion: @escaping RecordResponse) {
-    var dataTask: URLSessionDataTask?
+    OperationQueue().addOperation {
+      var dataTask: URLSessionDataTask?
 
-    dataTask = session.dataTask(with: request) { (data, _, error) in
-      if error != nil {
-        return print("Error: Could not connect to \(request.url?.absoluteString ?? "no url")")
+      dataTask = self.session.dataTask(with: request) { (data, _, error) in
+        if error != nil {
+          return print("Error: Could not connect to \(request.url?.absoluteString ?? "no url")")
+        }
+
+        if let data = data,
+          let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),
+          let dict = json as? [String: AnyObject] {
+          OperationQueue.main.addOperation { completion(dict) }
+          return
+        }
+
+        print("Error: Could not parse JSON response")
+        if let data = data,
+          let stringified = String(data: data, encoding: .utf8) {
+          print("Data: \(stringified)")
+        }
+        return
       }
 
-      if let data = data,
-        let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),
-        let dict = json as? [String: AnyObject] {
-        return completion(dict)
-      }
-
-      print("Error: Could not parse JSON response")
-      if let data = data,
-        let stringified = String(data: data, encoding: .utf8) {
-        print("Data: \(stringified)")
-      }
-      return
+      dataTask?.resume()
     }
-
-    dataTask?.resume()
   }
 }
 

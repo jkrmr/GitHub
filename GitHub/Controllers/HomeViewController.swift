@@ -41,19 +41,15 @@ class HomeViewController: UIViewController {
   }
 
   func loadRepositories() {
-    OperationQueue().addOperation {
-      GitHubAPI.shared.listRepositories { json in
-        guard let json = json else { return }
+    GitHubAPI.shared.listRepositories { json in
+      guard let json = json else { return }
 
-        OperationQueue.main.addOperation {
-          for entry in json {
-            guard let repo = Repository(json: entry) else { continue }
-            self.repositories.append(repo)
-          }
-          self.loadingIndicator.stopAnimating()
-          self.loadingIndicator.isHidden = true
-        }
+      for entry in json {
+        guard let repo = Repository(json: entry) else { continue }
+        self.repositories.append(repo)
       }
+      self.loadingIndicator.stopAnimating()
+      self.loadingIndicator.isHidden = true
     }
   }
 }
