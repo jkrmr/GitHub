@@ -24,25 +24,29 @@ class GitHubAPI {
   let clientSecret = ENVVars.shared.get("client_secret")
   var accessToken: String? { return UserDefaults.standard.getAccessToken() }
 
-  /// Query for the authenticated user's profile, yield the json to the 
+  // MARK: Authenticated user methods
+
+  /// Query for the authenticated user's profile, yield the json to the
   /// completion handler COMPLETION
   func getAuthenticatedUser(completion: @escaping RecordResponse) {
     let path = "/user"
     getJSONRecord(path: path, completion: completion)
   }
 
-  /// Query for user USERNAME's profile, yield the json to the completion 
-  /// handler COMPLETION
-  func getUser(username: String, completion: @escaping RecordResponse) {
-    let path = "/users/\(username)"
-    getJSONRecord(path: path, completion: completion)
-  }
-  
   /// Query for the authenticated user's repositories and yield the collection to
   /// completion handler COMPLETION
   func listRepositories(completion: @escaping CollectionResponse) {
     let path = "/user/repos"
     getJSONCollection(path: path, completion: completion)
+  }
+
+  // MARK: Target user methods
+  
+  /// Query for user USERNAME's profile, yield the json to the completion 
+  /// handler COMPLETION
+  func getUser(username: String, completion: @escaping RecordResponse) {
+    let path = "/users/\(username)"
+    getJSONRecord(path: path, completion: completion)
   }
 
   /// Query for USERNAME's repositories and yield the collection to
@@ -54,7 +58,7 @@ class GitHubAPI {
 
   /// Send a Get request to the given PATH, yield the parsed json
   /// to the completion handler COMPLETION as an array of dictionaries.
-  func getJSONCollection(path: String, completion: @escaping CollectionResponse) {
+  private func getJSONCollection(path: String, completion: @escaping CollectionResponse) {
     OperationQueue().addOperation {
       var dataTask: URLSessionDataTask?
 
@@ -62,7 +66,11 @@ class GitHubAPI {
         let url = URL(string: "\(self.apiBaseURL)\(path)?access_token=\(accessToken)")
         else { return print("Error: Malformed URL") }
 
-      dataTask = self.session.dataTask(with: url) { (data, _, error) in
+      var request = URLRequest(url: url)
+      // Add preview header for topics data
+      request.setValue("application/vnd.github.mercy-preview+json", forHTTPHeaderField: "Accept")
+
+      dataTask = self.session.dataTask(with: request) { (data, _, error) in
         if error != nil { return print("Error: Could not connect to \(url.absoluteString)") }
 
         if let data = data,
@@ -85,10 +93,10 @@ class GitHubAPI {
       dataTask?.resume()
     }
   }
-  
+
   /// Send a Get request to the given PATH, yield the parsed json
   /// to the completion handler COMPLETION as a dictionary.
-  func getJSONRecord(path: String, completion: @escaping RecordResponse) {
+  private func getJSONRecord(path: String, completion: @escaping RecordResponse) {
     OperationQueue().addOperation {
       var dataTask: URLSessionDataTask?
 
@@ -96,7 +104,11 @@ class GitHubAPI {
         let url = URL(string: "\(self.apiBaseURL)\(path)?access_token=\(accessToken)")
         else { return print("Error: Malformed URL") }
 
-      dataTask = self.session.dataTask(with: url) { (data, _, error) in
+      var request = URLRequest(url: url)
+      // Add preview header for topics data
+      request.setValue("application/vnd.github.mercy-preview+json", forHTTPHeaderField: "Accept")
+
+      dataTask = self.session.dataTask(with: request) { (data, _, error) in
         if error != nil { return print("Error: Could not connect to \(url.absoluteString)") }
 
         if let data = data,
@@ -120,6 +132,39 @@ class GitHubAPI {
     }
   }
 
+  /// Send a Post request with the given request object REQUEST,
+  /// yielding the response json to the completion handler
+  /// COMPLETION as a dictionary.
+  private func post(request: URLRequest, completion: @escaping RecordResponse) {
+    OperationQueue().addOperation {
+      var dataTask: URLSessionDataTask?
+
+      dataTask = self.session.dataTask(with: request) { (data, _, error) in
+        if error != nil {
+          return print("Error: Could not connect to \(request.url?.absoluteString ?? "no url")")
+        }
+
+        if let data = data,
+          let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),
+          let dict = json as? [String: AnyObject] {
+          OperationQueue.main.addOperation { completion(dict) }
+          return
+        }
+
+        print("Error: Could not parse JSON response")
+        if let data = data,
+          let stringified = String(data: data, encoding: .utf8) {
+          print("Data: \(stringified)")
+        }
+        return
+      }
+
+      dataTask?.resume()
+    }
+  }
+
+  // MARK: Authentication, Authorization
+  
   /// Build a URLRequest for requesting an authentication code
   func getAuthenticationRequest() -> URLRequest? {
     let scopes = [
@@ -158,37 +203,6 @@ class GitHubAPI {
     request.httpBody = paramData
 
     post(request: request, completion: completion)
-  }
-
-  /// Send a Post request with the given request object REQUEST,
-  /// yielding the response json to the completion handler
-  /// COMPLETION as a dictionary.
-  func post(request: URLRequest, completion: @escaping RecordResponse) {
-    OperationQueue().addOperation {
-      var dataTask: URLSessionDataTask?
-
-      dataTask = self.session.dataTask(with: request) { (data, _, error) in
-        if error != nil {
-          return print("Error: Could not connect to \(request.url?.absoluteString ?? "no url")")
-        }
-
-        if let data = data,
-          let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),
-          let dict = json as? [String: AnyObject] {
-          OperationQueue.main.addOperation { completion(dict) }
-          return
-        }
-
-        print("Error: Could not parse JSON response")
-        if let data = data,
-          let stringified = String(data: data, encoding: .utf8) {
-          print("Data: \(stringified)")
-        }
-        return
-      }
-
-      dataTask?.resume()
-    }
   }
 }
 
