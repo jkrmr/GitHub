@@ -17,8 +17,9 @@ struct ENVVars {
   func get(_ variable: String) -> String {
     guard let path = Bundle.main.url(forResource: "env", withExtension: "json"),
       let data = try? Data(contentsOf: path),
-      let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: AnyObject],
-      let token = json?[variable] as? String
+      let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),
+      let dict = json as? [String: String],
+      let token = dict[variable]
       else { return "" }
     return token
   }
