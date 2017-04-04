@@ -6,4 +6,22 @@
 //  Copyright © 2017 Jake Romer. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class RoundedEdgeImageView: UIImageView {
+  override var bounds: CGRect {
+    get {
+      return super.bounds
+    }
+    set {
+      super.bounds = newValue
+      setNeedsLayout()
+    }
+  }
+
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    layer.cornerRadius = bounds.width / 20
+    clipsToBounds = true
+  }
+}
