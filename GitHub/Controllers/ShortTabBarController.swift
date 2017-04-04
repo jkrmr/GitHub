@@ -11,6 +11,9 @@ import UIKit
 class ShortTabBarController: UITabBarController {
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.tabBar.layer.borderWidth = 0.5
+    self.tabBar.layer.borderColor = UIColor.lightGray.cgColor
+    self.tabBar.clipsToBounds = true
   }
 
   override func viewWillLayoutSubviews() {
