@@ -47,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
     if url.scheme == "github" && url.host == "auth" {
+      // TODO: Extract this to an object
       let queryParams = url.query?.components(separatedBy: "&")
       let codeParam = queryParams?.filter({ $0.hasPrefix("code=") }).first
 
