@@ -339,7 +339,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="container" id="gK7-fQ-ljb">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UserSearchResultCell" id="gK7-fQ-ljb" customClass="UserSearchResultCell" customModule="GitHub" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -395,6 +395,7 @@
                     <connections>
                         <outlet property="collectionView" destination="dqG-ld-TuN" id="GJP-6D-h45"/>
                         <outlet property="searchBar" destination="U0e-h4-E4F" id="wzz-3L-5IG"/>
+                        <outlet property="segmentedControl" destination="UAl-gR-DkJ" id="MCE-lm-NCr"/>
                         <outlet property="tableView" destination="guR-oW-VrH" id="k5G-uW-qG7"/>
                     </connections>
                 </viewController>

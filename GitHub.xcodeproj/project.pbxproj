@@ -17,6 +17,9 @@
 		1B44A6781E920C16006F4E4D /* RepositoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B44A6761E920C16006F4E4D /* RepositoryTableCell.swift */; };
 		1B44A6791E920C16006F4E4D /* RepositoryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B44A6771E920C16006F4E4D /* RepositoryTableCell.xib */; };
 		1B8D961C1E938BB9009DE599 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8D961B1E938BB9009DE599 /* ExploreViewController.swift */; };
+		1B8D961E1E940BB5009DE599 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8D961D1E940BB5009DE599 /* String.swift */; };
+		1B8D96211E9416EB009DE599 /* UserSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8D961F1E9416EB009DE599 /* UserSearchResultCell.swift */; };
+		1B8D96221E9416EB009DE599 /* UserSearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B8D96201E9416EB009DE599 /* UserSearchResultCell.xib */; };
 		1BA2C2AA1E90DB190013C605 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA2C2A91E90DB190013C605 /* AppDelegate.swift */; };
 		1BA2C2AC1E90DB190013C605 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA2C2AB1E90DB190013C605 /* HomeViewController.swift */; };
 		1BA2C2AE1E90DB190013C605 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA2C2AD1E90DB190013C605 /* ProfileViewController.swift */; };
@@ -40,6 +43,9 @@
 		1B44A6761E920C16006F4E4D /* RepositoryTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RepositoryTableCell.swift; path = Views/RepositoryTableCell.swift; sourceTree = "<group>"; };
 		1B44A6771E920C16006F4E4D /* RepositoryTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RepositoryTableCell.xib; path = Views/RepositoryTableCell.xib; sourceTree = "<group>"; };
 		1B8D961B1E938BB9009DE599 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreViewController.swift; path = Controllers/ExploreViewController.swift; sourceTree = "<group>"; };
+		1B8D961D1E940BB5009DE599 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = String.swift; path = Utilities/String.swift; sourceTree = "<group>"; };
+		1B8D961F1E9416EB009DE599 /* UserSearchResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSearchResultCell.swift; path = Views/UserSearchResultCell.swift; sourceTree = "<group>"; };
+		1B8D96201E9416EB009DE599 /* UserSearchResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserSearchResultCell.xib; path = Views/UserSearchResultCell.xib; sourceTree = "<group>"; };
 		1BA2C2A61E90DB190013C605 /* GitHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BA2C2A91E90DB190013C605 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BA2C2AB1E90DB190013C605 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = Controllers/HomeViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +122,8 @@
 				1BA2C2B41E90DB190013C605 /* LaunchScreen.storyboard */,
 				1B44A6761E920C16006F4E4D /* RepositoryTableCell.swift */,
 				1B44A6771E920C16006F4E4D /* RepositoryTableCell.xib */,
+				1B8D961F1E9416EB009DE599 /* UserSearchResultCell.swift */,
+				1B8D96201E9416EB009DE599 /* UserSearchResultCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -141,6 +149,7 @@
 				1BA2C2B71E90DB190013C605 /* Info.plist */,
 				1BA2C2C61E90E27E0013C605 /* UIResponder.swift */,
 				1B3D6C2F1E92EC6400423FAE /* UserDefaults.swift */,
+				1B8D961D1E940BB5009DE599 /* String.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -228,6 +237,7 @@
 				1BA2C2B61E90DB190013C605 /* LaunchScreen.storyboard in Resources */,
 				1B44A66F1E91DFF6006F4E4D /* env.json in Resources */,
 				1B44A6791E920C16006F4E4D /* RepositoryTableCell.xib in Resources */,
+				1B8D96221E9416EB009DE599 /* UserSearchResultCell.xib in Resources */,
 				1BA2C2B31E90DB190013C605 /* Assets.xcassets in Resources */,
 				1BA2C2B11E90DB190013C605 /* Main.storyboard in Resources */,
 			);
@@ -297,9 +307,11 @@
 				1B44A6751E91FF3C006F4E4D /* RepositoryViewController.swift in Sources */,
 				1B3D6C2A1E92B6CE00423FAE /* AuthenticationViewController.swift in Sources */,
 				1B44A6731E91EE26006F4E4D /* User.swift in Sources */,
+				1B8D96211E9416EB009DE599 /* UserSearchResultCell.swift in Sources */,
 				1BA2C2C71E90E27E0013C605 /* UIResponder.swift in Sources */,
 				1B3D6C2C1E92B8D800423FAE /* ENVVars.swift in Sources */,
 				1B44A66D1E91827F006F4E4D /* GitHubAPI.swift in Sources */,
+				1B8D961E1E940BB5009DE599 /* String.swift in Sources */,
 				1B8D961C1E938BB9009DE599 /* ExploreViewController.swift in Sources */,
 				1BA2C2AC1E90DB190013C605 /* HomeViewController.swift in Sources */,
 			);

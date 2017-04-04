@@ -13,6 +13,15 @@ class ExploreViewController: UIViewController {
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var searchBar: UISearchBar!
+  @IBOutlet weak var segmentedControl: UISegmentedControl!
+
+  var repositories = [Repository]() {
+    didSet { tableView.reloadData() }
+  }
+
+  var users = [User]() {
+    didSet { collectionView.reloadData() }
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,6 +30,9 @@ class ExploreViewController: UIViewController {
     collectionView.dataSource = self
     tableView.delegate = self
     tableView.dataSource = self
+
+    let userCell = UINib(nibName: UserSearchResultCell.reuseID, bundle: nil)
+    collectionView.register(userCell, forCellWithReuseIdentifier: UserSearchResultCell.reuseID)
   }
 
   // MARK: IBActions
@@ -43,9 +55,35 @@ class ExploreViewController: UIViewController {
 }
 
 // MARK: Search Bar
+// TODO: Add pull-to-refresh, pagination, loading indicator
 extension ExploreViewController: UISearchBarDelegate {
-  func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-    print("text editing ended")
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    guard let searchQuery = searchBar.text else { return }
+
+    switch segmentedControl.selectedSegmentIndex {
+    case 0:
+      GitHubAPI.shared.searchRepositories(query: searchQuery) { result in
+        guard let items = result?["items"] as? [[String: AnyObject]] else { return }
+        self.repositories.removeAll()
+
+        for item in items {
+          guard let repo = Repository(json: item) else { continue }
+          self.repositories.append(repo)
+        }
+      }
+    case 1:
+      GitHubAPI.shared.searchUsers(query: searchQuery) { result in
+        guard let items = result?["items"] as? [[String: AnyObject]] else { return }
+        self.users.removeAll()
+
+        for item in items {
+          guard let user = User(json: item) else { continue }
+          self.users.append(user)
+        }
+      }
+    default:
+      break
+    }
   }
 }
 
@@ -56,11 +94,12 @@ extension ExploreViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 10
+    return repositories.count
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+    cell.textLabel?.text = repositories[indexPath.row].fullName
     return cell
   }
 }
@@ -72,11 +111,13 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
   }
 
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 10
+    return users.count
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "container", for: indexPath)
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserSearchResultCell.reuseID,
+                                                  for: indexPath) as! UserSearchResultCell
+    cell.user = users[indexPath.row]
     return cell
   }
 }

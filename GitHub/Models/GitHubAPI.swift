@@ -25,7 +25,6 @@ class GitHubAPI {
   var accessToken: String? { return UserDefaults.standard.getAccessToken() }
 
   // MARK: Authenticated user methods
-
   /// Query for the authenticated user's profile, yield the json to the
   /// completion handler COMPLETION
   func getAuthenticatedUser(completion: @escaping RecordResponse) {
@@ -41,7 +40,6 @@ class GitHubAPI {
   }
 
   // MARK: Target user methods
-  
   /// Query for user USERNAME's profile, yield the json to the completion 
   /// handler COMPLETION
   func getUser(username: String, completion: @escaping RecordResponse) {
@@ -56,6 +54,42 @@ class GitHubAPI {
     getJSONCollection(path: path, completion: completion)
   }
 
+  // MARK: Search methods
+  private func buildSearchQuery(query: String, sort: SearchSort? = nil, order: SearchOrder? = nil) -> String {
+    let queryTerms = query.scan("[:word:]+").joined(separator: "+")
+
+    // Build query string
+    var queryString = "?q=\(queryTerms)"
+    if let sort = sort?.rawValue { queryString += "&sort=\(sort)" }
+    if let order = order?.rawValue { queryString += "&order=\(order)" }
+
+    return queryString
+  }
+
+  func searchRepositories(query: String, sort: SearchSort? = nil,
+                          order: SearchOrder? = nil, completion: @escaping RecordResponse) {
+    let path = "/search/repositories"
+    let queryString = buildSearchQuery(query: query, sort: sort, order: order)
+    getJSONRecord(path: "\(path)\(queryString)", completion: completion)
+  }
+
+  func searchUsers(query: String, sort: SearchSort? = nil,
+                   order: SearchOrder? = nil, completion: @escaping RecordResponse) {
+    let path = "/search/users"
+    let queryString = buildSearchQuery(query: query, sort: sort, order: order)
+    getJSONRecord(path: "\(path)\(queryString)", completion: completion)
+  }
+
+  func searchIssues(query: String, sort: SearchSort? = nil,
+                    order: SearchOrder? = nil, completion: @escaping RecordResponse) {
+  }
+
+  func searchCommits(query: String, sort: SearchSort? = nil,
+                     order: SearchOrder? = nil, completion: @escaping RecordResponse) {
+  }
+
+  // MARK: Generic request methods
+
   /// Send a Get request to the given PATH, yield the parsed json
   /// to the completion handler COMPLETION as an array of dictionaries.
   private func getJSONCollection(path: String, completion: @escaping CollectionResponse) {
@@ -63,12 +97,13 @@ class GitHubAPI {
       var dataTask: URLSessionDataTask?
 
       guard let accessToken = self.accessToken,
-        let url = URL(string: "\(self.apiBaseURL)\(path)?access_token=\(accessToken)")
+        let url = URL(string: "\(self.apiBaseURL)\(path)")
         else { return print("Error: Malformed URL") }
 
       var request = URLRequest(url: url)
       // Add preview header for topics data
       request.setValue("application/vnd.github.mercy-preview+json", forHTTPHeaderField: "Accept")
+      request.setValue("token \(accessToken)", forHTTPHeaderField: "Authorization")
 
       dataTask = self.session.dataTask(with: request) { (data, _, error) in
         if error != nil { return print("Error: Could not connect to \(url.absoluteString)") }
@@ -101,12 +136,13 @@ class GitHubAPI {
       var dataTask: URLSessionDataTask?
 
       guard let accessToken = self.accessToken,
-        let url = URL(string: "\(self.apiBaseURL)\(path)?access_token=\(accessToken)")
+        let url = URL(string: "\(self.apiBaseURL)\(path)")
         else { return print("Error: Malformed URL") }
 
       var request = URLRequest(url: url)
       // Add preview header for topics data
       request.setValue("application/vnd.github.mercy-preview+json", forHTTPHeaderField: "Accept")
+      request.setValue("token \(accessToken)", forHTTPHeaderField: "Authorization")
 
       dataTask = self.session.dataTask(with: request) { (data, _, error) in
         if error != nil { return print("Error: Could not connect to \(url.absoluteString)") }
@@ -164,7 +200,6 @@ class GitHubAPI {
   }
 
   // MARK: Authentication, Authorization
-  
   /// Build a URLRequest for requesting an authentication code
   func getAuthenticationRequest() -> URLRequest? {
     let scopes = [
@@ -203,6 +238,18 @@ class GitHubAPI {
     request.httpBody = paramData
 
     post(request: request, completion: completion)
+  }
+
+  // MARK: enums for API request options
+  enum SearchSort: String {
+    case stars = "stars"
+    case forks = "forks"
+    case updated = "updated"
+  }
+
+  enum SearchOrder: String {
+    case ascending = "asc"
+    case descending = "desc"
   }
 }
 
