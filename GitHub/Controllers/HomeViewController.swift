@@ -11,6 +11,7 @@ import UIKit
 class HomeViewController: UIViewController {
   @IBOutlet weak var repositoriesTableView: UITableView!
   @IBOutlet weak var repositorySearchBar: UISearchBar!
+  @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
 
   var repositories = [Repository]() {
     didSet { repositoriesTableView.reloadData() }
@@ -40,17 +41,15 @@ class HomeViewController: UIViewController {
   }
 
   func loadRepositories() {
-    OperationQueue().addOperation {
-      GitHubAPI.shared.listRepositories { json in
-        guard let json = json else { return }
+    GitHubAPI.shared.listRepositories { json in
+      guard let json = json else { return }
 
-        for entry in json {
-          guard let repo = Repository(json: entry) else { continue }
-          OperationQueue.main.addOperation {
-            self.repositories.append(repo)
-          }
-        }
+      for entry in json {
+        guard let repo = Repository(json: entry) else { continue }
+        self.repositories.append(repo)
       }
+      self.loadingIndicator.stopAnimating()
+      self.loadingIndicator.isHidden = true
     }
   }
 }

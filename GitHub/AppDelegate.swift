@@ -11,9 +11,15 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
-  
+
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+    if let _ = UserDefaults.standard.getAccessToken() {
+      let tabBarController = window?.rootViewController?.storyboard?.instantiateViewController(withIdentifier: ShortTabBarController.reuseID)
+      window?.rootViewController = tabBarController
+    } else {
+      let authController = window?.rootViewController?.storyboard?.instantiateViewController(withIdentifier: AuthenticationViewController.reuseID)
+      window?.rootViewController = authController
+    }
     return true
   }
   
@@ -37,6 +43,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func applicationWillTerminate(_ application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+  }
+
+  func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    if url.scheme == "github" && url.host == "auth" {
+      let queryParams = url.query?.components(separatedBy: "&")
+      let codeParam = queryParams?.filter({ $0.hasPrefix("code=") }).first
+
+      if let code = codeParam?.replacingOccurrences(of: "code=", with: "") {
+        GitHubAPI.shared.postAuthorization(authCode: code) { (resp) in
+          guard resp != nil, let accessToken = resp?["access_token"] as? String
+            else { return }
+          
+          if UserDefaults.standard.saveAccessToken(accessToken) {
+            // if access granted, load tab bar controller
+            let tabBarController = self.window?.rootViewController?.storyboard?.instantiateViewController(withIdentifier: ShortTabBarController.reuseID)
+            self.window?.rootViewController = tabBarController
+          }
+        }
+
+        return true
+      }
+    }
+    return false
   }
 }
 

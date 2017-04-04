@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="HAV-wm-H7T">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -38,25 +38,33 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-nd-dZr">
+                            <searchBar contentMode="redraw" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-nd-dZr">
                                 <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                             </searchBar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="dg8-TE-XRk">
+                                <rect key="frame" x="169.5" y="315" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="TWC-nd-dZr" secondAttribute="trailing" id="02k-6R-20m"/>
                             <constraint firstItem="TWC-nd-dZr" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="5ab-Su-cTq"/>
+                            <constraint firstItem="dg8-TE-XRk" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" id="EU9-tF-FmN"/>
                             <constraint firstAttribute="trailing" secondItem="6Gi-Zp-hnY" secondAttribute="trailing" id="PPe-12-1iE"/>
                             <constraint firstItem="TWC-nd-dZr" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="WKr-vm-FbI"/>
                             <constraint firstItem="6Gi-Zp-hnY" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="Xdf-Fp-cCa"/>
+                            <constraint firstItem="dg8-TE-XRk" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="a3W-2z-XCs"/>
                             <constraint firstItem="6Gi-Zp-hnY" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="x3A-4g-NuE"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="6Gi-Zp-hnY" secondAttribute="bottom" constant="-52" id="zFZ-wf-H7w"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Repositories" id="hCd-yM-Hw7"/>
                     <connections>
+                        <outlet property="loadingIndicator" destination="dg8-TE-XRk" id="RMk-9z-9eS"/>
                         <outlet property="repositoriesTableView" destination="6Gi-Zp-hnY" id="MV4-hl-v5f"/>
                         <outlet property="repositorySearchBar" destination="TWC-nd-dZr" id="y1y-v7-RG2"/>
                     </connections>
@@ -135,7 +143,7 @@
         <!--Short Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController id="49e-Tb-3d3" customClass="ShortTabBarController" customModule="GitHub" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="ShortTabBarController" id="49e-Tb-3d3" customClass="ShortTabBarController" customModule="GitHub" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
@@ -194,6 +202,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oMO-js-IPn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="455" y="798"/>
+        </scene>
+        <!--Authentication-->
+        <scene sceneID="X0M-bX-bo8">
+            <objects>
+                <viewController storyboardIdentifier="AuthenticationViewController" title="Authentication" id="HAV-wm-H7T" customClass="AuthenticationViewController" customModule="GitHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uT2-no-tMd"/>
+                        <viewControllerLayoutGuide type="bottom" id="loQ-FK-Cty"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8FP-xm-lFN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kru-gf-pWJ">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="j2H-9F-Knn">
+                                <rect key="frame" x="169" y="315.5" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kru-gf-pWJ" firstAttribute="top" secondItem="uT2-no-tMd" secondAttribute="bottom" id="CZe-YH-Bdm"/>
+                            <constraint firstItem="loQ-FK-Cty" firstAttribute="top" secondItem="kru-gf-pWJ" secondAttribute="bottom" id="Cpa-rE-FDL"/>
+                            <constraint firstItem="j2H-9F-Knn" firstAttribute="centerY" secondItem="8FP-xm-lFN" secondAttribute="centerY" id="HX0-SX-h9h"/>
+                            <constraint firstAttribute="trailing" secondItem="kru-gf-pWJ" secondAttribute="trailing" id="fHD-Xe-shG"/>
+                            <constraint firstItem="kru-gf-pWJ" firstAttribute="leading" secondItem="8FP-xm-lFN" secondAttribute="leading" id="uHV-o3-pB6"/>
+                            <constraint firstItem="j2H-9F-Knn" firstAttribute="centerX" secondItem="8FP-xm-lFN" secondAttribute="centerX" id="vpF-wz-I1o"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loadingIndicator" destination="j2H-9F-Knn" id="p26-L3-lDG"/>
+                        <outlet property="webView" destination="kru-gf-pWJ" id="rjd-XP-ulQ"/>
+                        <segue destination="49e-Tb-3d3" kind="show" identifier="ShortTabViewController" id="Fit-OF-54B"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k66-a2-qyS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-898" y="0.0"/>
         </scene>
         <!--Repository View Controller-->
         <scene sceneID="Suf-U1-sgz">
