@@ -29,10 +29,10 @@ class RepositoryViewController: UIViewController {
       repoName.text = repository.name
       repoDescription.text = repository.description
       repoLanguage.text = repository.language
-      repoStars.text = "\(repository.stargazersCount)"
-      repoForks.text = "\(repository.forksCount)"
-      repoIsFork.text = repository.isFork ? "fork" : ""
-      repoCreatedAt.text = repository.createdAt.toString()
+      repoStars.text = "Stars: \(repository.stargazersCount)"
+      repoForks.text = "Forks: \(repository.forksCount)"
+      repoIsFork.text = repository.isFork ? "fork of" : ""
+      repoCreatedAt.text = "Created: \(repository.createdAt.toString())"
     }
   }
 }
