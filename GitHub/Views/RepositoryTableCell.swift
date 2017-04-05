@@ -21,21 +21,21 @@ class RepositoryTableCell: UITableViewCell {
     didSet {
       repoName.text = repository.fullName
       repoDescription.text = repository.description
-      repoLanguage.text = repository.language
-
-      if repository.stargazersCount > 0 {
-        starsCount.text = "\(repository.stargazersCount)"
-        starsContainer.isHidden = false
-      } else {
-        starsContainer.isHidden = true
-      }
-
-      if repository.forksCount > 0 {
-        forksCount.text = "\(repository.forksCount)"
-        forksContainer.isHidden = false
-      } else {
-        forksContainer.isHidden = true
-      }
+//      repoLanguage.text = repository.language
+//
+//      if repository.stargazersCount > 0 {
+//        starsCount.text = "\(repository.stargazersCount)"
+//        starsContainer.isHidden = false
+//      } else {
+//        starsContainer.isHidden = true
+//      }
+//
+//      if repository.forksCount > 0 {
+//        forksCount.text = "\(repository.forksCount)"
+//        forksContainer.isHidden = false
+//      } else {
+//        forksContainer.isHidden = true
+//      }
     }
   }
 

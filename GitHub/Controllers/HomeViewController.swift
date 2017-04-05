@@ -72,7 +72,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     let cell = tableView.dequeueReusableCell(withIdentifier: RepositoryTableCell.reuseID,
                                              for: indexPath) as! RepositoryTableCell
     cell.repository = repositories[indexPath.row]
-    
+
     return cell
   }
 
