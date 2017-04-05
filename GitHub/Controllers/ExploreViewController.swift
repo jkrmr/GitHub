@@ -30,6 +30,7 @@ class ExploreViewController: UIViewController {
     collectionView.dataSource = self
     tableView.delegate = self
     tableView.dataSource = self
+    tableView.separatorInset = .zero
 
     let userCell = UINib(nibName: UserSearchResultCell.reuseID, bundle: nil)
     collectionView.register(userCell, forCellWithReuseIdentifier: UserSearchResultCell.reuseID)

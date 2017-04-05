@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
   @IBOutlet weak var userUsername: UILabel!
   @IBOutlet weak var userProfileContainer: UIView!
   @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+  @IBOutlet weak var tableView: UITableView!
 
   var user: User? {
     didSet {
@@ -37,6 +38,9 @@ class ProfileViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    tableView.separatorInset = .zero
+    tableView.delegate = self
+    tableView.dataSource = self
 
     userProfileContainer.layer.borderColor = UIColor.lightGray.cgColor
     userProfileContainer.layer.borderWidth = 0.5
@@ -55,5 +59,25 @@ class ProfileViewController: UIViewController {
       // in medium
       // Collect likes on commits
     }
+  }
+}
+
+// MARK: TableView
+extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return 1
+  }
+
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 10
+  }
+
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath)
+    return cell
+  }
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    print("Selected row number \(indexPath.row)")
   }
 }
