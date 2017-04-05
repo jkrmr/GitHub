@@ -19,6 +19,8 @@
 		1B6940E21E94450A0014E900 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6940E11E94450A0014E900 /* UIImage.swift */; };
 		1B6940E41E9452B90014E900 /* RoundedEdgeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6940E31E9452B90014E900 /* RoundedEdgeImageView.swift */; };
 		1B6940E61E945F840014E900 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6940E51E945F840014E900 /* Event.swift */; };
+		1B6940E81E94A69A0014E900 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6940E71E94A69A0014E900 /* NotificationsViewController.swift */; };
+		1B6940EA1E94A6EB0014E900 /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6940E91E94A6EB0014E900 /* BookmarksViewController.swift */; };
 		1B8D961C1E938BB9009DE599 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8D961B1E938BB9009DE599 /* ExploreViewController.swift */; };
 		1B8D961E1E940BB5009DE599 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8D961D1E940BB5009DE599 /* String.swift */; };
 		1B8D96211E9416EB009DE599 /* UserSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8D961F1E9416EB009DE599 /* UserSearchResultCell.swift */; };
@@ -48,6 +50,8 @@
 		1B6940E11E94450A0014E900 /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImage.swift; path = Utilities/UIImage.swift; sourceTree = "<group>"; };
 		1B6940E31E9452B90014E900 /* RoundedEdgeImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoundedEdgeImageView.swift; path = Views/RoundedEdgeImageView.swift; sourceTree = "<group>"; };
 		1B6940E51E945F840014E900 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Models/Event.swift; sourceTree = "<group>"; };
+		1B6940E71E94A69A0014E900 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationsViewController.swift; path = Controllers/NotificationsViewController.swift; sourceTree = "<group>"; };
+		1B6940E91E94A6EB0014E900 /* BookmarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BookmarksViewController.swift; path = Controllers/BookmarksViewController.swift; sourceTree = "<group>"; };
 		1B8D961B1E938BB9009DE599 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreViewController.swift; path = Controllers/ExploreViewController.swift; sourceTree = "<group>"; };
 		1B8D961D1E940BB5009DE599 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = String.swift; path = Utilities/String.swift; sourceTree = "<group>"; };
 		1B8D961F1E9416EB009DE599 /* UserSearchResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSearchResultCell.swift; path = Views/UserSearchResultCell.swift; sourceTree = "<group>"; };
@@ -145,6 +149,8 @@
 				1B44A6741E91FF3C006F4E4D /* RepositoryViewController.swift */,
 				1B3D6C291E92B6CE00423FAE /* AuthenticationViewController.swift */,
 				1B8D961B1E938BB9009DE599 /* ExploreViewController.swift */,
+				1B6940E71E94A69A0014E900 /* NotificationsViewController.swift */,
+				1B6940E91E94A6EB0014E900 /* BookmarksViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -307,6 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B6940EA1E94A6EB0014E900 /* BookmarksViewController.swift in Sources */,
 				1BA2C2AE1E90DB190013C605 /* ProfileViewController.swift in Sources */,
 				1BA2C2AA1E90DB190013C605 /* AppDelegate.swift in Sources */,
 				1BA2C2C51E90E2450013C605 /* Repository.swift in Sources */,
@@ -322,6 +329,7 @@
 				1B8D96211E9416EB009DE599 /* UserSearchResultCell.swift in Sources */,
 				1BA2C2C71E90E27E0013C605 /* UIResponder.swift in Sources */,
 				1B3D6C2C1E92B8D800423FAE /* ENVVars.swift in Sources */,
+				1B6940E81E94A69A0014E900 /* NotificationsViewController.swift in Sources */,
 				1B44A66D1E91827F006F4E4D /* GitHubAPI.swift in Sources */,
 				1B8D961E1E940BB5009DE599 /* String.swift in Sources */,
 				1B8D961C1E938BB9009DE599 /* ExploreViewController.swift in Sources */,

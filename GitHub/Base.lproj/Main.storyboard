@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Repositories-->
+        <!--Home View Controller-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="HomeViewController" customModule="GitHub" customModuleProvider="target" sceneMemberID="viewController">
@@ -63,7 +63,7 @@
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="6Gi-Zp-hnY" secondAttribute="bottom" constant="-52" id="zFZ-wf-H7w"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Repositories" id="hCd-yM-Hw7"/>
+                    <navigationItem key="navigationItem" id="hCd-yM-Hw7"/>
                     <connections>
                         <outlet property="loadingIndicator" destination="dg8-TE-XRk" id="RMk-9z-9eS"/>
                         <outlet property="searchBar" destination="TWC-nd-dZr" id="eTh-rh-JJ0"/>
@@ -72,7 +72,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1291" y="-1306"/>
+            <point key="canvasLocation" x="1723" y="-1307"/>
         </scene>
         <!--Profile-->
         <scene sceneID="wg7-f3-ORb">
@@ -163,6 +163,7 @@
                     <connections>
                         <outlet property="loadingIndicator" destination="FCk-dh-8er" id="fjp-pO-8bX"/>
                         <outlet property="navItem" destination="Fh1-j5-D7R" id="vcZ-lj-xMC"/>
+                        <outlet property="tableView" destination="X69-BN-yJB" id="ayz-UA-Yhs"/>
                         <outlet property="userAvatar" destination="5cA-qs-ncP" id="Lf6-IP-Och"/>
                         <outlet property="userDisplayName" destination="h7u-rR-D2f" id="isR-pi-uNP"/>
                         <outlet property="userProfileContainer" destination="9X1-jl-zY0" id="xhB-zf-qcC"/>
@@ -171,7 +172,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1291" y="1452"/>
+            <point key="canvasLocation" x="1721" y="1451"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="pyr-eT-00S">
@@ -189,7 +190,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lRG-r8-5y2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1785" y="1452"/>
+            <point key="canvasLocation" x="2610" y="1451"/>
         </scene>
         <!--Short Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -236,10 +237,10 @@
             </objects>
             <point key="canvasLocation" x="834" y="-1306"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Notifications-->
         <scene sceneID="gfP-Fd-goE">
             <objects>
-                <tableViewController id="dGo-0d-da2" sceneMemberID="viewController">
+                <tableViewController id="dGo-0d-da2" customClass="NotificationsViewController" customModule="GitHub" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Kut-1B-2or">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -259,11 +260,11 @@
                             <outlet property="delegate" destination="dGo-0d-da2" id="h6x-VU-pQ3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="hvD-VL-TTb"/>
+                    <navigationItem key="navigationItem" title="Notifications" id="hvD-VL-TTb"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pRI-eT-iae" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1291" y="730"/>
+            <point key="canvasLocation" x="1723" y="730"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lMc-db-Uj5">
@@ -305,17 +306,23 @@
             </objects>
             <point key="canvasLocation" x="834" y="1452"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Bookmarks-->
         <scene sceneID="Ahb-PJ-ewc">
             <objects>
-                <tableViewController id="WFx-IM-hfv" sceneMemberID="viewController">
+                <tableViewController id="WFx-IM-hfv" customClass="BookmarksViewController" customModule="GitHub" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="lWc-AD-AwO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" translucent="NO" id="H0U-UY-e80">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookmarksCell" id="9wO-VF-xcn">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9wO-VF-xcn" id="xz5-KU-Jlt">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -328,11 +335,11 @@
                             <outlet property="delegate" destination="WFx-IM-hfv" id="HIt-X5-tiD"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="7QJ-x5-Oj8"/>
+                    <navigationItem key="navigationItem" title="Bookmarks" id="7QJ-x5-Oj8"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qc2-Ce-5dj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1291" y="-636"/>
+            <point key="canvasLocation" x="1723" y="-637"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="e0d-nx-jpZ">
@@ -445,7 +452,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rFF-ub-URp" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1785" y="-1306"/>
+            <point key="canvasLocation" x="2651" y="-1307"/>
         </scene>
         <!--Explore-->
         <scene sceneID="sml-Wt-Hys">
@@ -522,6 +529,7 @@
                                     <constraint firstItem="dqG-ld-TuN" firstAttribute="leading" secondItem="p19-k5-H4G" secondAttribute="leading" id="LC9-j6-hhM"/>
                                     <constraint firstAttribute="bottom" secondItem="guR-oW-VrH" secondAttribute="bottom" id="QfT-qW-Hyq"/>
                                     <constraint firstItem="guR-oW-VrH" firstAttribute="top" secondItem="p19-k5-H4G" secondAttribute="top" id="Uqd-nC-LLn"/>
+                                    <constraint firstItem="guR-oW-VrH" firstAttribute="leading" secondItem="p19-k5-H4G" secondAttribute="leading" id="i3p-8v-b9u"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -549,7 +557,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zNJ-J5-mGP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1291" y="31"/>
+            <point key="canvasLocation" x="1721.25" y="30.633802816901408"/>
         </scene>
     </scenes>
     <resources>

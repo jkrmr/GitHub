@@ -28,11 +28,15 @@ class HomeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    let logoImageView = UIImageView(image: #imageLiteral(resourceName: "github_logo"))
+    navigationItem.titleView = logoImageView
+
     searchBar.delegate = self
     searchBar.returnKeyType = .done
 
     tableView.delegate = self
     tableView.dataSource = self
+    tableView.separatorInset = .zero
 
     let repoNib = UINib(nibName: RepositoryTableCell.reuseID, bundle: nil)
     tableView.register(repoNib, forCellReuseIdentifier: RepositoryTableCell.reuseID)
