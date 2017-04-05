@@ -485,7 +485,7 @@
                                 <rect key="frame" x="0.0" y="156" width="320" height="363"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dqG-ld-TuN">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="363"/>
+                                        <rect key="frame" x="15" y="0.0" width="290" height="363"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0uM-ws-yde">
                                             <size key="itemSize" width="50" height="50"/>
@@ -523,13 +523,13 @@
                                 <constraints>
                                     <constraint firstItem="dqG-ld-TuN" firstAttribute="top" secondItem="p19-k5-H4G" secondAttribute="top" id="2SP-TA-JUK"/>
                                     <constraint firstAttribute="trailing" secondItem="guR-oW-VrH" secondAttribute="trailing" id="6cT-rK-knh"/>
-                                    <constraint firstAttribute="trailing" secondItem="dqG-ld-TuN" secondAttribute="trailing" id="70c-os-dEa"/>
+                                    <constraint firstItem="dqG-ld-TuN" firstAttribute="leading" secondItem="p19-k5-H4G" secondAttribute="leading" constant="15" id="ClY-7L-RTU"/>
                                     <constraint firstItem="guR-oW-VrH" firstAttribute="leading" secondItem="p19-k5-H4G" secondAttribute="leading" id="IZu-qM-5Eq"/>
                                     <constraint firstAttribute="bottom" secondItem="dqG-ld-TuN" secondAttribute="bottom" id="JHG-ym-x6d"/>
-                                    <constraint firstItem="dqG-ld-TuN" firstAttribute="leading" secondItem="p19-k5-H4G" secondAttribute="leading" id="LC9-j6-hhM"/>
                                     <constraint firstAttribute="bottom" secondItem="guR-oW-VrH" secondAttribute="bottom" id="QfT-qW-Hyq"/>
                                     <constraint firstItem="guR-oW-VrH" firstAttribute="top" secondItem="p19-k5-H4G" secondAttribute="top" id="Uqd-nC-LLn"/>
                                     <constraint firstItem="guR-oW-VrH" firstAttribute="leading" secondItem="p19-k5-H4G" secondAttribute="leading" id="i3p-8v-b9u"/>
+                                    <constraint firstAttribute="trailing" secondItem="dqG-ld-TuN" secondAttribute="trailing" constant="15" id="iLu-gg-cXb"/>
                                 </constraints>
                             </view>
                         </subviews>
