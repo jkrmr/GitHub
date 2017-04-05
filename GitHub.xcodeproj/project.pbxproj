@@ -129,8 +129,8 @@
 		1BA2C2BE1E90DD090013C605 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1B6940E31E9452B90014E900 /* RoundedEdgeImageView.swift */,
 				1BA2C2AF1E90DB190013C605 /* Main.storyboard */,
+				1B6940E31E9452B90014E900 /* RoundedEdgeImageView.swift */,
 				1BA2C2B41E90DB190013C605 /* LaunchScreen.storyboard */,
 				1B44A6761E920C16006F4E4D /* RepositoryTableCell.swift */,
 				1B44A6771E920C16006F4E4D /* RepositoryTableCell.xib */,
