@@ -69,14 +69,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if let cell = tableView.dequeueReusableCell(withIdentifier: RepositoryTableCell.reuseID,
-                                                            for: indexPath) as? RepositoryTableCell {
-      cell.repository = repositories[indexPath.row]
-
-      return cell
-    } else {
-      return RepositoryTableCell()
-    }
+    let cell = tableView.dequeueReusableCell(withIdentifier: RepositoryTableCell.reuseID,
+                                             for: indexPath) as! RepositoryTableCell
+    cell.repository = repositories[indexPath.row]
+    
+    return cell
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
