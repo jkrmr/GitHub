@@ -21,6 +21,7 @@
 		1B6940E61E945F840014E900 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6940E51E945F840014E900 /* Event.swift */; };
 		1B6940E81E94A69A0014E900 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6940E71E94A69A0014E900 /* NotificationsViewController.swift */; };
 		1B6940EA1E94A6EB0014E900 /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6940E91E94A6EB0014E900 /* BookmarksViewController.swift */; };
+		1B8C83981E95A9930087EE29 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8C83971E95A9930087EE29 /* Date.swift */; };
 		1B8D961C1E938BB9009DE599 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8D961B1E938BB9009DE599 /* ExploreViewController.swift */; };
 		1B8D961E1E940BB5009DE599 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8D961D1E940BB5009DE599 /* String.swift */; };
 		1B8D96211E9416EB009DE599 /* UserSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8D961F1E9416EB009DE599 /* UserSearchResultCell.swift */; };
@@ -52,6 +53,7 @@
 		1B6940E51E945F840014E900 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Models/Event.swift; sourceTree = "<group>"; };
 		1B6940E71E94A69A0014E900 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationsViewController.swift; path = Controllers/NotificationsViewController.swift; sourceTree = "<group>"; };
 		1B6940E91E94A6EB0014E900 /* BookmarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BookmarksViewController.swift; path = Controllers/BookmarksViewController.swift; sourceTree = "<group>"; };
+		1B8C83971E95A9930087EE29 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Date.swift; path = Utilities/Date.swift; sourceTree = "<group>"; };
 		1B8D961B1E938BB9009DE599 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreViewController.swift; path = Controllers/ExploreViewController.swift; sourceTree = "<group>"; };
 		1B8D961D1E940BB5009DE599 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = String.swift; path = Utilities/String.swift; sourceTree = "<group>"; };
 		1B8D961F1E9416EB009DE599 /* UserSearchResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSearchResultCell.swift; path = Views/UserSearchResultCell.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				1B3D6C2F1E92EC6400423FAE /* UserDefaults.swift */,
 				1B8D961D1E940BB5009DE599 /* String.swift */,
 				1B6940E11E94450A0014E900 /* UIImage.swift */,
+				1B8C83971E95A9930087EE29 /* Date.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				1B6940E81E94A69A0014E900 /* NotificationsViewController.swift in Sources */,
 				1B44A66D1E91827F006F4E4D /* GitHubAPI.swift in Sources */,
 				1B8D961E1E940BB5009DE599 /* String.swift in Sources */,
+				1B8C83981E95A9930087EE29 /* Date.swift in Sources */,
 				1B8D961C1E938BB9009DE599 /* ExploreViewController.swift in Sources */,
 				1BA2C2AC1E90DB190013C605 /* HomeViewController.swift in Sources */,
 			);
