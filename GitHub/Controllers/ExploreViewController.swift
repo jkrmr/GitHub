@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class ExploreViewController: UIViewController {
   // MARK: IBOutlets
@@ -120,6 +121,14 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
                                                   for: indexPath) as! UserSearchResultCell
     cell.user = users[indexPath.row]
     return cell
+  }
+
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let selectedUser = users[indexPath.row]
+    if let url = URL(string: selectedUser.urlHTML) {
+      let safariVC = SFSafariViewController(url: url)
+      present(safariVC, animated: true, completion: nil)
+    }
   }
 }
 
