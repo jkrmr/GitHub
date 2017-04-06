@@ -14,6 +14,21 @@ class HomeViewController: UIViewController {
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
 
+  // MARK: IBActions
+  @IBAction func filterButtonPressed(_ sender: UIBarButtonItem) {
+    let wasHidden = searchBar.isHidden
+    UIView.animate(withDuration: 0.3,
+                   delay: 0,
+                   options: .curveEaseInOut,
+                   animations: {
+                    let translation: CGFloat = wasHidden ? 1.0 : -50.0
+                    self.searchBar.isHidden = !wasHidden
+                    self.tableView.transform = CGAffineTransform(translationX: 0, y: translation)
+                    self.searchBar.layoutIfNeeded()
+                   },
+                   completion: nil)
+  }
+
   // MARK: Properties
   var allRepositories = [Repository]() {
     didSet { tableView.reloadData() }
@@ -30,13 +45,16 @@ class HomeViewController: UIViewController {
 
     let logoImageView = UIImageView(image: #imageLiteral(resourceName: "github_logo"))
     navigationItem.titleView = logoImageView
+    navigationController?.navigationBar.topItem?.title = ""
 
     searchBar.delegate = self
     searchBar.returnKeyType = .done
+    searchBar.isHidden = true
 
     tableView.delegate = self
     tableView.dataSource = self
     tableView.separatorInset = .zero
+    tableView.transform = CGAffineTransform(translationX: 0, y: -50.0)
 
     let repoNib = UINib(nibName: RepositoryTableCell.reuseID, bundle: nil)
     tableView.register(repoNib, forCellReuseIdentifier: RepositoryTableCell.reuseID)
@@ -72,7 +90,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     let cell = tableView.dequeueReusableCell(withIdentifier: RepositoryTableCell.reuseID,
                                              for: indexPath) as! RepositoryTableCell
     cell.repository = repositories[indexPath.row]
-    
+
     return cell
   }
 
@@ -100,7 +118,7 @@ extension HomeViewController: UISearchBarDelegate {
     } else {
       inSearchMode = true
       let searchTerm = searchText.lowercased()
-      filteredRepositories = allRepositories.filter { $0.name.lowercased().range(of: searchTerm) != nil }
+      filteredRepositories = allRepositories.filter { $0.fullName.lowercased().range(of: searchTerm) != nil }
     }
     tableView.reloadData()
   }

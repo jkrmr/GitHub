@@ -15,7 +15,7 @@ struct Repository: Decodable {
   let owner: User
   let url: String
   let urlHTML: String
-  let createdAt: String
+  let createdAt: Date
   let isPrivate: Bool
   let isFork: Bool
 
@@ -35,7 +35,8 @@ struct Repository: Decodable {
       let owner: User = "owner" <~~ json,
       let url: String = "url" <~~ json,
       let urlHTML: String = "html_url" <~~ json,
-      let createdAt: String = "created_at" <~~ json,
+      let createdAtString: String = "created_at" <~~ json,
+      let createdAt: Date = Date.fromString(createdAtString),
       let isPrivate: Bool = "private" <~~ json,
       let isFork: Bool = "fork" <~~ json
       else { return nil }

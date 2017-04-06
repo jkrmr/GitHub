@@ -9,11 +9,14 @@
 import UIKit
 
 class UserSearchResultCell: UICollectionViewCell {
-  @IBOutlet weak var username: UILabel!
+  @IBOutlet weak var userAvatarImage: RoundedEdgeImageView!
 
   var user: User? {
     didSet {
-      username.text = user?.login
+      guard let url = user?.urlAvatar else { return }
+      UIImage.fromURL(url: url) { image in
+        self.userAvatarImage.image = image
+      }
     }
   }
 

@@ -18,21 +18,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UtG-2u-23Q">
-                        <rect key="frame" x="54" y="65" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fVX-cH-Uad" customClass="RoundedEdgeImageView" customModule="GitHub" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="UtG-2u-23Q" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="4d9-1E-pDQ"/>
-                <constraint firstItem="UtG-2u-23Q" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="gwt-ie-lyF"/>
+                <constraint firstAttribute="trailing" secondItem="fVX-cH-Uad" secondAttribute="trailing" id="AIR-cV-1Eh"/>
+                <constraint firstItem="fVX-cH-Uad" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="S7B-Qc-Bok"/>
+                <constraint firstAttribute="bottom" secondItem="fVX-cH-Uad" secondAttribute="bottom" id="YxV-kS-DEM"/>
+                <constraint firstItem="fVX-cH-Uad" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="rXg-AG-Dn5"/>
             </constraints>
             <size key="customSize" width="150" height="150"/>
             <connections>
-                <outlet property="username" destination="UtG-2u-23Q" id="isi-vD-7H8"/>
+                <outlet property="userAvatarImage" destination="fVX-cH-Uad" id="DB6-nc-pDQ"/>
             </connections>
             <point key="canvasLocation" x="84" y="104"/>
         </collectionViewCell>
