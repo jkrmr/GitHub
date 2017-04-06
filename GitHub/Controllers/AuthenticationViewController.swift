@@ -16,7 +16,7 @@ class AuthenticationViewController: UIViewController, UIWebViewDelegate {
     super.viewDidLoad()
     webView.delegate = self
 
-    if let authRequest = GitHubAPI.shared.getAuthenticationRequest() {
+    if let authRequest = GitHubAPI.shared.buildAuthenticationRequest() {
       webView.loadRequest(authRequest)
     }
   }
