@@ -56,10 +56,6 @@ extension Date {
                          dateFormat: String = "yyyy-MM-dd'T'HH:mm:ssZ") -> Date? {
     let formatter = DateFormatter()
     formatter.dateFormat = dateFormat
-
-    guard let date = formatter.date(from: dateString)
-      else { return nil }
-
-    return date
+    return formatter.date(from: dateString)
   }
 }
