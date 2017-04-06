@@ -9,6 +9,11 @@
 import Foundation
 
 extension String {
+  func sanitized() -> String {
+    let term = scan("[:word:]+").joined(separator: " ")
+    return term.lowercased()
+  }
+
   func scan(_ regex: String) -> [String] {
     do {
       let regex = try NSRegularExpression(pattern: regex)

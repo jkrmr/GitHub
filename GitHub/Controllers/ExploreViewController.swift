@@ -60,7 +60,8 @@ class ExploreViewController: UIViewController {
 // TODO: Add pull-to-refresh, pagination, loading indicator
 extension ExploreViewController: UISearchBarDelegate {
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    guard let searchQuery = searchBar.text else { return }
+    guard let searchQuery = searchBar.text?.sanitized()
+      else { return }
 
     switch segmentedControl.selectedSegmentIndex {
     case 0:
