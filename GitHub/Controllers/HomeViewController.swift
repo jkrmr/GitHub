@@ -30,6 +30,7 @@ class HomeViewController: UIViewController {
 
     let logoImageView = UIImageView(image: #imageLiteral(resourceName: "github_logo"))
     navigationItem.titleView = logoImageView
+    navigationController?.navigationBar.topItem?.title = ""
 
     searchBar.delegate = self
     searchBar.returnKeyType = .done
