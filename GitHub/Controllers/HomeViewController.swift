@@ -117,7 +117,7 @@ extension HomeViewController: UISearchBarDelegate {
       inSearchMode = false
     } else {
       inSearchMode = true
-      let searchTerm = searchText.lowercased()
+      let searchTerm = searchText.sanitized()
       filteredRepositories = allRepositories.filter { $0.fullName.lowercased().range(of: searchTerm) != nil }
     }
     tableView.reloadData()

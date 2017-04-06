@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class RepositoryViewController: UIViewController {
   var repository: Repository?
@@ -33,6 +34,13 @@ class RepositoryViewController: UIViewController {
       repoForks.text = "Forks: \(repository.forksCount)"
       repoIsFork.text = repository.isFork ? "fork of" : ""
       repoCreatedAt.text = "Created: \(repository.createdAt.toString())"
+    }
+  }
+
+  @IBAction func repoNameWasTapped(_ sender: UITapGestureRecognizer) {
+    if let urlString = repository?.urlHTML, let url = URL(string: urlString) {
+      let safariVC = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+      present(safariVC, animated: true, completion: nil)
     }
   }
 }

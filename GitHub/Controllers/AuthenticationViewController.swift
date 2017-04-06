@@ -6,22 +6,30 @@
 //  Copyright © 2017 Jake Romer. All rights reserved.
 //
 
+import SafariServices
 import UIKit
 
-class AuthenticationViewController: UIViewController, UIWebViewDelegate {
-  @IBOutlet weak var webView: UIWebView!
+class AuthenticationViewController: UIViewController, SFSafariViewControllerDelegate {
   @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+
+  var safari: SFSafariViewController!
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    webView.delegate = self
 
-    if let authRequest = GitHubAPI.shared.getAuthenticationRequest() {
-      webView.loadRequest(authRequest)
+    if let authRequest = GitHubAPI.shared.buildAuthenticationRequest(),
+      let url = authRequest.url {
+      safari = SFSafariViewController(url: url)
+      safari.delegate = self
     }
   }
 
-  func webViewDidFinishLoad(_ webView: UIWebView) {
+  override func viewDidAppear(_ animated: Bool) {
+    guard let safari = safari else { return }
+    present(safari, animated: true, completion: nil)
+  }
+
+  func safariViewController(_ controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
     loadingIndicator.stopAnimating()
   }
 }

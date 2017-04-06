@@ -213,7 +213,7 @@ class GitHubAPI {
 
   // MARK: Authentication, Authorization
   /// Build a URLRequest for requesting an authentication code
-  func getAuthenticationRequest() -> URLRequest? {
+  func buildAuthenticationRequest() -> URLRequest? {
     let scopes = [
       "repo",
       "user",
