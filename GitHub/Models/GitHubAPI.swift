@@ -35,7 +35,7 @@ class GitHubAPI {
   /// Query for the authenticated user's repositories and yield the collection to
   /// completion handler COMPLETION
   func listRepositories(completion: @escaping CollectionResponse) {
-    let path = "/user/repos"
+    let path = "/user/repos?type=owner,collaborator"
     getJSONCollection(path: path, completion: completion)
   }
 
