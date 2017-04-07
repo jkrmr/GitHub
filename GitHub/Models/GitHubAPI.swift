@@ -90,6 +90,19 @@ class GitHubAPI {
     getJSONRecord(path: "\(path)\(queryString)", completion: completion)
   }
 
+  // application/vnd.github.mercy-preview+json
+  func searchTopics(query: String, sort: SearchSort? = nil,
+                    order: SearchOrder? = nil, completion: @escaping RecordResponse) {
+    let path = "/search/repositories"
+    let topics = query.scan("[:alnum:]+").map({ "topic:\($0)" }).joined(separator: "+")
+
+    var queryString = "?q=\(topics)"
+    if let sort = sort?.rawValue { queryString += "&sort=\(sort)" }
+    if let order = order?.rawValue { queryString += "&order=\(order)" }
+
+    getJSONRecord(path: "\(path)\(queryString)", completion: completion)
+  }
+
   private func buildSearchQuery(query: String, sort: SearchSort? = nil, order: SearchOrder? = nil) -> String {
     let queryTerms = query.scan("[:word:]+").joined(separator: "+")
 

@@ -29,7 +29,8 @@ class AuthenticationViewController: UIViewController, SFSafariViewControllerDele
     present(safari, animated: true, completion: nil)
   }
 
-  func safariViewController(_ controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
+  func safariViewController(_ controller: SFSafariViewController,
+                            didCompleteInitialLoad didLoadSuccessfully: Bool) {
     loadingIndicator.stopAnimating()
   }
 }

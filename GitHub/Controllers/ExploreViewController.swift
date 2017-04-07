@@ -39,13 +39,19 @@ class ExploreViewController: UIViewController {
 
   // MARK: IBActions
   @IBAction func exploreToggle(_ sender: UISegmentedControl) {
-    switch sender.selectedSegmentIndex {
-    case 0:
+    guard let segment = sender.titleForSegment(at: sender.selectedSegmentIndex)
+      else { return }
+
+    repositories.removeAll()
+    users.removeAll()
+
+    switch segment {
+    case "Topics", "Repositories":
       UIView.animate(withDuration: 0.5, animations: {
         self.collectionView.alpha = 0
         self.tableView.alpha = 1
       })
-    case 1:
+    case "Users":
       UIView.animate(withDuration: 0.5, animations: {
         self.collectionView.alpha = 1
         self.tableView.alpha = 0
@@ -60,11 +66,22 @@ class ExploreViewController: UIViewController {
 // TODO: Add pull-to-refresh, pagination, loading indicator
 extension ExploreViewController: UISearchBarDelegate {
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    guard let searchQuery = searchBar.text?.sanitized()
+    guard let searchQuery = searchBar.text?.sanitized(),
+      let segment = segmentedControl.titleForSegment(at: segmentedControl.selectedSegmentIndex)
       else { return }
 
-    switch segmentedControl.selectedSegmentIndex {
-    case 0:
+    switch segment {
+    case "Topics":
+      GitHubAPI.shared.searchTopics(query: searchQuery) { result in
+        guard let items = result?["items"] as? [[String: AnyObject]] else { return }
+        self.repositories.removeAll()
+
+        for item in items {
+          guard let repo = Repository(json: item) else { continue }
+          self.repositories.append(repo)
+        }
+      }
+    case "Repositories":
       GitHubAPI.shared.searchRepositories(query: searchQuery) { result in
         guard let items = result?["items"] as? [[String: AnyObject]] else { return }
         self.repositories.removeAll()
@@ -74,7 +91,7 @@ extension ExploreViewController: UISearchBarDelegate {
           self.repositories.append(repo)
         }
       }
-    case 1:
+    case "Users":
       GitHubAPI.shared.searchUsers(query: searchQuery) { result in
         guard let items = result?["items"] as? [[String: AnyObject]] else { return }
         self.users.removeAll()
