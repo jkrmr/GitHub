@@ -1,2 +1,9 @@
 * GitHub
-  An iOS GitHub client
+  An iOS GitHub client designed on casual content discovery.
+
+** Screenshots
+   #+CAPTION: The home screen
+   [[https://cloud.githubusercontent.com/assets/4433943/26480106/f08c391a-41a5-11e7-9b47-0f4afa9d77df.png]]
+
+   #+CAPTION: The user search feature
+   [[https://cloud.githubusercontent.com/assets/4433943/26480107/f08caa9e-41a5-11e7-9478-80ece08fd3a2.png]]
