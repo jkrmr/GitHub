@@ -1,5 +1,5 @@
 * GitHub
-  An iOS GitHub client designed on casual content discovery.
+  An iOS GitHub client designed for casual content discovery.
 
 ** Screenshots
    #+CAPTION: The home screen
